@@ -1,16 +1,15 @@
 "use client"
 import Image from "next/image";
-import Navbar from "./components/Navbar";
+import Navbar from "../components/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEmpire } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRight, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, keyframes, useInView } from "framer-motion";
 import { motion } from "framer-motion";
-import LandingTimelineSection from "./components/LandingTimelineSection";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css"
 import { useRouter } from "next/navigation";
+import { TimelineCircle } from "../components/TimelineCircle";
 
 export default function Home() {
 
@@ -203,7 +202,7 @@ export default function Home() {
           </AnimatePresence>
 
 
-          <div>
+          <div className="self-center justify-self-center">
             <button className="flex justify-self-center self-center text-lg items-center gap-2 bg-ruby py-2 px-4 rounded transition-all duration-200 hover:bg-darkRuby active:scale-90"
               onClick={()=>setAbout(!aboutSelected)}
             >
@@ -218,55 +217,100 @@ export default function Home() {
       >
         <h1 className="border py-4 px-8 tracking-wider rounded">Timeline of Events</h1>
       </div>
+      <div className="relative">
+        <div className="absolute w-10 z-10 top-0 left-[5%] h-full bg-red-500 flex flex-col items-center">
+            <div className="absolute top-[10%]">
+                <TimelineCircle/>
+            </div>
+            <div className="absolute top-[calc(100vh+10%)]">
+                <TimelineCircle/>
+            </div>
+            <div className="absolute top-[calc(200vh+10%)]">
+                <TimelineCircle/>
+            </div>
+            <div className="absolute top-[calc(300vh+10%)]">
+                <TimelineCircle/>
+            </div>
+        </div>
 
-      <Carousel 
-        responsive={responsive}
-        sliderClass="bg-green-500 flex justify-center top-20"
-        containerClass="h-screen"
-        customButtonGroup={<CustomButtongroup/>}
-        customRightArrow={<CustomRightArrow/>}
-        customLeftArrow={<CustomLeftArrow/>}
-        >
-        <LandingTimelineSection title={"The State of the World"} year={"1936"} link={"/articles/1936-1940"} backgroundImage={"/images/treatyParis_France.jpg"} isInView={slidesInView}/>
-        <LandingTimelineSection title={"A Clash Between Hammers and Claws"} year={"1940"} link={"/articles/1940-1944"} backgroundImage={"/images/treatyLondon.jpg"} isInView={slidesInView}/>
-        <LandingTimelineSection title={"The War Beyond Europe"} year={"1944"} link={"/articles/1944-1948"} backgroundImage={"/images/russia.png"} isInView={slidesInView}/>
-        <LandingTimelineSection title={"The Eagle Reigns Supreme"} year={"1948"} link={"/articles/1948-1951"} backgroundImage={"/images/northAmerica.png"} isInView={slidesInView}/>
-
-      </Carousel>
-
-      <div className="flex justify-center items-center bg-darkRuby h-32 text-6xl font-bold mt-8"
+        <div className="relative grid grid-rows-[100vh_100vh_100vh_100vh] z-0 gap-10 bg-darkRuby">
+            <div className="bg-coal relative">
+                <Image src={`/images/treatyLondon.jpg`} alt="landingpageimage" fill style={{objectFit: "cover"}}/>
+                <div className="absolute bg-coal bg-opacity-30 h-full w-full grid grid-rows-2 z-0">
+                    <div className="flex justify-center items-center text-7xl font-bold">
+                        <h1 className="underline-offset-8s  underline">The State of The World</h1>
+                    </div>
+                    <div className="bg-gradient-to-b from-transparent to-coal to-70% flex items-center justify-center gap-10">
+                        <div className="border border-soot rounded p-2 max-w-[50%]">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
+                        </div>
+                        <button className="flex items-center gap-2 bg-ruby rounded p-2 transition-transform duration-200 hover:scale-110">
+                            Read More
+                            <FontAwesomeIcon icon={faArrowRight}/>
+                        </button>                        
+                    </div>
+                </div>
+            </div>
+            <div className="bg-coal relative">
+                <Image src={`/images/treatyLondon.jpg`} alt="landingpageimage" fill style={{objectFit: "cover"}}/>
+                <div className="absolute bg-coal bg-opacity-30 h-full w-full grid grid-rows-2 z-0">
+                    <div className="flex justify-center items-center text-7xl font-bold">
+                        <h1 className="underline-offset-8s  underline">The State of The World</h1>
+                    </div>
+                    <div className="bg-gradient-to-b from-transparent to-coal to-70% flex items-center justify-center gap-10">
+                        <div className="border border-soot rounded p-2 max-w-[50%]">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
+                        </div>
+                        <button className="flex items-center gap-2 bg-ruby rounded p-2 transition-transform duration-200 hover:scale-110">
+                            Read More
+                            <FontAwesomeIcon icon={faArrowRight}/>
+                        </button>                        
+                    </div>
+                </div>
+            </div>
+            <div className="bg-coal relative">
+                <Image src={`/images/treatyLondon.jpg`} alt="landingpageimage" fill style={{objectFit: "cover"}}/>
+                <div className="absolute bg-coal bg-opacity-30 h-full w-full grid grid-rows-2 z-0">
+                    <div className="flex justify-center items-center text-7xl font-bold">
+                        <h1 className="underline-offset-8s  underline">The State of The World</h1>
+                    </div>
+                    <div className="bg-gradient-to-b from-transparent to-coal to-70% flex items-center justify-center gap-10">
+                        <div className="border border-soot rounded p-2 max-w-[50%]">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
+                        </div>
+                        <button className="flex items-center gap-2 bg-ruby rounded p-2 transition-transform duration-200 hover:scale-110">
+                            Read More
+                            <FontAwesomeIcon icon={faArrowRight}/>
+                        </button>                        
+                    </div>
+                </div>
+            </div>
+            <div className="bg-coal relative">
+                <Image src={`/images/treatyLondon.jpg`} alt="landingpageimage" fill style={{objectFit: "cover"}}/>
+                <div className="absolute bg-coal bg-opacity-30 h-full w-full grid grid-rows-2 z-0">
+                    <div className="flex justify-center items-center text-7xl font-bold">
+                        <h1 className="underline-offset-8s  underline">The State of The World</h1>
+                    </div>
+                    <div className="bg-gradient-to-b from-transparent to-coal to-70% flex items-center justify-center gap-10">
+                        <div className="border border-soot rounded p-2 max-w-[50%]">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
+                        </div>
+                        <button className="flex items-center gap-2 bg-ruby rounded p-2 transition-transform duration-200 hover:scale-110">
+                            Read More
+                            <FontAwesomeIcon icon={faArrowRight}/>
+                        </button>                        
+                    </div>
+                </div>
+            </div>
+        </div>        
+      </div>
+      <div className="flex justify-center items-center bg-darkRuby h-32 text-6xl font-bold " ref={timelineRef}
       >
         <h1 className="border py-4 px-8 tracking-wider rounded">Peace Treaties</h1>
-      </div>      
-      <div className="h-screen bg-charcoal grid grid-rows-1 grid-cols-2 px-4">
-        <div className="w-full flex justify-center items-center h-full">
-          <div className="relative w-full h-5/6 p-4 border-2 rounded">
-            <div className="relative w-full h-full rounded">
-              <Image
-                src={"/images/KRworld1951V2.png"}
-                fill={true}
-                alt="peace treaty image"
-                style={{objectFit: "cover", borderRadius: "4px"}}
-              />               
-            </div>            
-          </div>
-
-         
-
-        </div>
-        <div className="h-full flex flex-col justify-center items-center gap-10 border-coal">
-            <div className="w-9/12 p-4 text-xl border-2 rounded">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
-            </div>
-            <motion.div              
-              className="flex bg-ruby rounded items-center text-xl gap-2 px-4 py-2 duration-200 hover:scale-110 cursor-pointer" onClick={()=>router.push("/articles/peace-treaties")}
-              >
-                <h3 className="font-bold tracking-wide">Read More</h3>
-                <FontAwesomeIcon icon={faArrowRight}/>
-            </motion.div>
-        </div>
       </div>
 
+
+     
 
     </div>
   );
