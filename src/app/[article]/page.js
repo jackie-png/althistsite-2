@@ -11,7 +11,7 @@ export default async function page(){
                 <div 
                     className="flex justify-center items-center h-screen w-screen absolute top-0 bg-gradient-to-t from-coal from-25%">
                     <div 
-                        className="bg-coal bg-opacity-60 rounded-t border-t-soot border-r-soot border-l-soot border-t-2 border-l-2 border-r-2 text-snow flex items-center justify-center flex-col gap-4 h-1/2 w-1/2">
+                        className=" bg-opacity-60 rounded-t border-t-soot border-r-soot border-l-soot border-t-2 border-l-2 border-r-2 text-snow flex items-center justify-center flex-col gap-4 h-1/2 w-1/2 backdrop-blur-sm">
                         <h1 className="text-9xl">1936-1940</h1>
                         <h2 className="text-6xl">The State of The World</h2>
                     </div>
