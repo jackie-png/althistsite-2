@@ -1,8 +1,27 @@
+"use client"
 import React from "react"
 import Image from "next/image"
-export default async function page(){
+import { useState, useEffect } from "react"
+import { motion , useScroll } from "framer-motion"
+export default function page(){
+    const {scrollYProgress} = useScroll()
+        const [height,setHeight] = useState(0);
+        const [hasReachedBottom, setHasReached] = useState(false);
+    
+      useEffect(() => {
+        return scrollYProgress.onChange((value) => {
+          console.log("scrollYProgress:", value); // This will return a number (0 to 1)
+          if(!hasReachedBottom){
+            setHeight(value);
+          }
+        });
+      }, [scrollYProgress]);
     return(
         <div className="bg-coal flex flex-col items-center justify-center pb-16">
+            <motion.div
+                className="fixed top-0 left-0 origin-top-left z-[9999] w-full h-3 bg-ruby"
+                style={{width: `${height*100}%`}}
+            ></motion.div>
             <div 
                 className="relative h-screen w-screen bg-cover bg-no-repeat justify-center" 
                 style={{

@@ -14,16 +14,7 @@ export default function Home() {
   const [aboutSelected, setAbout] = useState(false)
   const router = useRouter()
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 0 },
-      items: 1
-    },
-
-  }
-
-  function TimelineSection({date, title, image, last}){
+  function TimelineSection({date, title, image, last, link}){
     const ref = useRef(null);
     const isInView = useInView(ref,{once: true, amount: 0.7});
     const [height,setHeight] = useState(0);
@@ -49,7 +40,17 @@ export default function Home() {
     return (
       <div className="bg-coal relative" ref={ref}>
         {!last && <div className="absolute z-20 bottom-0 w-full h-1 flex justify-center items-center">
-          <div className="bg-darkRuby w-1/3 h-full rounded"></div>
+          <motion.div 
+            initial={{width: 0}}
+            animate={{width: (isInView ? "33%" : 0)}}
+            transition={{
+              delay: 0.8,
+              duration: 0.5,
+              ease: "easeInOut"
+            }}
+            className="bg-darkRuby h-full rounded">
+
+          </motion.div>
         </div>}
         <Image src={image} alt="landingpageimage" fill style={{objectFit: "cover"}}/>
         <div className={`absolute w-10 z-20 top-0 left-[5%] ${height >=100 ? "rounded-b-none" : "rounded-b-full" } flex flex-col items-center justify-center`} style={{height: `100%`}}>
@@ -59,27 +60,75 @@ export default function Home() {
                 scale: (isInView ? 1 : 0)
               }}
               className="bg-darkRuby w-44 h-44 flex justify-center items-center rounded-full shadow-lg">
-                <div className="bg-white w-32 h-32 flex justify-center items-center rounded-full">
+                <motion.div
+                  initial={{scale: 0}}
+                  animate={{
+                    scale: (isInView ? 1 : 0)
+                  }}
+                  transition={{
+                    delay: 0.2
+                  }}
+                  className="bg-white w-32 h-32 flex justify-center items-center rounded-full">
                   <h1 className="text-coal text-4xl font-bold">{date}</h1>
-                </div>
+                </motion.div>
             </motion.div>
         </div>
-        <div className={`absolute w-10 z-10 top-0 left-[5%] bg-red-500 ${height >=100 ? "rounded-b-none" : "rounded-b-full" } flex flex-col items-center justify-center`} style={{height: `${height}%`}}>
+        <div className={`absolute w-10 z-10 top-0 left-[5%] bg-ruby ${height >=100 ? "rounded-b-none" : "rounded-b-full" } flex flex-col items-center justify-center`} style={{height: `${height}%`}}>
         </div>
         <div className="absolute bg-coal bg-opacity-30 h-full w-full grid grid-rows-3 z-0">
             <div className="bg-gradient-to-t from-transparent to-coal to-70%">                       
             </div>
-            <div className="flex w-2/3 justify-center items-center self-center justify-self-center text-7xl font-bold">
+            <motion.div 
+              initial={{
+                opacity: 0,
+                y: 20
+              }}
+              animate={{
+                opacity: (isInView ? 1 : 0),
+                y: (isInView ? 0 : 20),
+              }}
+              transition={{
+                duration: 0.5,
+                delay: 0.3
+              }}
+              className="flex w-2/3 justify-center items-center self-center justify-self-center text-7xl font-bold">
               <h1 className="underline-offset-8s  underline">{title}</h1>
-            </div>
+            </motion.div>
             <div className="bg-gradient-to-b from-transparent to-coal to-70% flex items-center justify-center gap-10">
-                <div className="border border-soot rounded p-2 max-w-[50%] backdrop-blur-sm">
+                <motion.div 
+                  initial={{
+                    opacity: 0,
+                    x: -30
+                  }}
+                  animate={{
+                    opacity: (isInView ? 1 : 0),
+                    x: (isInView ? 0 : -30)
+                  }}
+                  transition={{
+                    delay: 0.6,
+                    duration: 0.5,
+                    ease: "easeInOut"
+                  }}
+                  className="border border-soot rounded p-2 max-w-[50%] backdrop-blur-sm">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
-                </div>
-                <button className="flex items-center gap-2 bg-ruby rounded p-2 transition-transform duration-200 hover:scale-110">
+                </motion.div>
+                <motion.button
+                  initial={{
+                    opacity: 0,
+                  }}
+                  animate={{
+                    opacity: (isInView ? 1 : 0),
+                  }}
+                  transition={{
+                    delay: 0.6,
+                    duration: 0.5,
+                    ease: "easeInOut"
+                  }}
+                  onClick={()=>router.push(link)}
+                  className="flex items-center gap-2 bg-ruby rounded p-2 transition-transform duration-200 hover:scale-110">
                     Read More
                     <FontAwesomeIcon icon={faArrowRight}/>
-                </button>                        
+                </motion.button>                        
             </div>
         </div>
       </div>
@@ -142,10 +191,10 @@ export default function Home() {
         </div>
         <div className="relative">
             <div className="relative grid grid-rows-[100vh_100vh_100vh_100vh] z-10">
-                <TimelineSection date={1936} title={"The State of the World"} image={"/images/treatyLondon.jpg"}/>
-                <TimelineSection date={1940} title={"The Clash between Hammers and Claws"} image={"/images/image2.png"}/>
-                <TimelineSection date={1944} title={"The War Beyond Europe"} image={"/images/russia.png"}/>
-                <TimelineSection date={1948} title={"Rise of a New World Order"} image={"/images/northAmerica.png"} last/>
+                <TimelineSection date={1936} title={"The State of the World"} image={"/images/treatyLondon.jpg"} link={"/1936-1940"}/>
+                <TimelineSection date={1940} title={"The Clash between Hammers and Claws"} image={"/images/image2.png"} link={"/1940-1944"}/>
+                <TimelineSection date={1944} title={"The War Beyond Europe"} image={"/images/russia.png"} link={"/1944-1948"}/>
+                <TimelineSection date={1948} title={"Rise of a New World Order"} image={"/images/northAmerica.png"} link={"/1948-1951"} last/>
             </div>        
         </div>
         <div className="flex justify-center items-center bg-darkRuby h-32 text-6xl font-bold ">
@@ -158,7 +207,10 @@ export default function Home() {
                     <p className="text-2xl">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.
                     </p>
-                    <button className="flex items-center gap-4 text-2xl font-bold bg-ruby py-2 px-4 rounded transition-transform duration-200 hover:scale-110">
+                    <button 
+                      className="flex items-center gap-4 text-2xl font-bold bg-ruby py-2 px-4 rounded transition-transform duration-200 hover:scale-110"
+                      onClick={()=>router.push("/peace-treaties")}
+                      >
                         <p className="text-2xl">See More</p>
                         <FontAwesomeIcon icon={faArrowRight}/>
                     </button>
