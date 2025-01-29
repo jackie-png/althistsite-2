@@ -1,24 +1,17 @@
 "use client"
 import Image from "next/image";
-import Navbar from "./components/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEmpire } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRight, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, keyframes, useInView } from "framer-motion";
+import { AnimatePresence, keyframes, useInView, useScroll, useTransform } from "framer-motion";
 import { motion } from "framer-motion";
-import LandingTimelineSection from "./components/LandingTimelineSection";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css"
 import { useRouter } from "next/navigation";
 
 export default function Home() {
 
   const [aboutSelected, setAbout] = useState(false)
-  const timelineRef = useRef()
-  const timelineInView = useInView(timelineRef, {amount: 1, once: true})
-  const slideInView = useRef([false,false,false,false])
-  const [slidesInView, setView] = useState([false,false,false,false])
   const router = useRouter()
 
   const responsive = {
@@ -30,136 +23,65 @@ export default function Home() {
 
   }
 
-  useEffect(()=>{
-    // slideInView.current=[true,false,false,false]
-    setView([true,false,false,false])
-    console.log(timelineInView)
-  },[timelineInView])
+  function TimelineSection({date, title, image, last}){
+    const ref = useRef(null);
+    const isInView = useInView(ref,{once: true, amount: 0.7});
+    const [height,setHeight] = useState(0);
+    const [hasReachedBottom, setHasReached] = useState(false);
+    const {scrollYProgress} = useScroll({
+      target: ref,
+      offset: ["start end", "end end"]
+    })
 
-  const CustomButtongroup = ({next, previous, goToSlide, carouselState}) =>{
-    console.log(carouselState.currentSlide)
-    let width
-    switch (carouselState.currentSlide) {
-      case 0:
-        width="16%"
-        break;
-      case 1:
-        width="41%"
-        break;
-      case 2:
-        width="60%"
-        break;
-      case 3:
-        width="83%"
-        break;
-      default:
-        width="83%"
-        break;
-    }
-    return(
-      <div className="absolute top-0 w-full h-48 text-black bg-coal ">
-        <motion.div 
-          initial={{width: "0%"}}
-          animate={{width: "83%"}}
-          transition={{
-            ease: "easeInOut",
-            duration: 0.5
-          }}
-          className={` rounded-r-full border-ruby border-2 h-6 absolute z-0 top-[4.5rem]`}>
-        </motion.div>
-        <motion.div 
-          initial={{width: "0%"}}
-          animate={{width: width}}
-          transition={{
-            ease: "easeInOut",
-            duration: 0.5
-          }}
-          className={` rounded-r-full bg-darkRuby h-6 absolute z-10 top-[4.5rem]`}>
-        </motion.div>
-        <div className="flex justify-evenly z-20 relative top-7">
-          <motion.div 
-            initial={{scale: 0}}
-            animate={{
-              scale: (timelineInView ? 1 : [0])
-            }}
-            whileHover={{
-              scale: 1.2,
-            }}
-            transition={{
-              type: keyframes,
-              duration: 0.3,
-              ease:"easeOut"
-            }}
-            className="cursor-pointer flex justify-center items-center w-28 h-28 bg-ruby rounded-full shadow-2xl" onClick={()=>goToSlide(0)}>
-            <div className="cursor-pointer flex justify-center items-center w-20 h-20 bg-white rounded-full text-center font-bold select-none">1936</div>
-          </motion.div>
-          <motion.div 
-            initial={{scale: 0}}
-            animate={{
-              scale: (timelineInView ? 1 : [0])
-            }}
-            whileHover={{
-              scale: 1.2,
-            }}
-            transition={{
-              type: keyframes,
-              duration: 0.3,
-              ease:"easeOut"
-            }}
-            className="cursor-pointer flex justify-center items-center w-28 h-28 bg-ruby rounded-full shadow-2xl" onClick={()=>goToSlide(1)}>
-            <div className="cursor-pointer flex justify-center items-center w-20 h-20 bg-white rounded-full text-center font-bold select-none">1940</div>
-          </motion.div>
-          <motion.div
-            initial={{scale: 0}}
-            animate={{
-              scale: (timelineInView ? 1 : [0])
-            }}
-            whileHover={{
-              scale: 1.2,
-            }}
-            transition={{
-              type: keyframes,
-              duration: 0.3,
-              ease:"easeOut"
-            }}
-            className="cursor-pointer flex justify-center items-center w-28 h-28 bg-ruby rounded-full shadow-2xl" onClick={()=>goToSlide(2)}>
-            <div className="cursor-pointer flex justify-center items-center w-20 h-20 bg-white rounded-full text-center font-bold select-none">1944</div>
-          </motion.div>
-          <motion.div
-            initial={{scale: 0}}
-            animate={{
-              scale: (timelineInView ? 1 : [0])
-            }}
-            whileHover={{
-              scale: 1.2,
-            }}
-            transition={{
-              type: keyframes,
-              duration: 0.3,
-              ease:"easeOut"
-            }}
-            className="cursor-pointer flex justify-center items-center w-28 h-28 bg-ruby rounded-full shadow-2xl" onClick={()=>goToSlide(3)}>
-            <div className="cursor-pointer flex justify-center items-center w-20 h-20 bg-white rounded-full text-center font-bold select-none">1948</div>
-          </motion.div>          
+    useEffect(()=>{
+      console.log(isInView);
+    },[isInView])
+
+  useEffect(() => {
+    return scrollYProgress.onChange((value) => {
+      console.log("scrollYProgress:", value); // This will return a number (0 to 1)
+      if(!hasReachedBottom){
+        setHeight(value * 100);
+      }
+    });
+  }, [scrollYProgress]);
+  
+    return (
+      <div className="bg-coal relative" ref={ref}>
+        {!last && <div className="absolute z-20 bottom-0 w-full h-1 flex justify-center items-center">
+          <div className="bg-darkRuby w-1/3 h-full rounded"></div>
+        </div>}
+        <Image src={image} alt="landingpageimage" fill style={{objectFit: "cover"}}/>
+        <div className={`absolute w-10 z-20 top-0 left-[5%] ${height >=100 ? "rounded-b-none" : "rounded-b-full" } flex flex-col items-center justify-center`} style={{height: `100%`}}>
+            <motion.div 
+              initial={{scale: 0}}
+              animate={{
+                scale: (isInView ? 1 : 0)
+              }}
+              className="bg-darkRuby w-44 h-44 flex justify-center items-center rounded-full shadow-lg">
+                <div className="bg-white w-32 h-32 flex justify-center items-center rounded-full">
+                  <h1 className="text-coal text-4xl font-bold">{date}</h1>
+                </div>
+            </motion.div>
         </div>
-
-      </div>
-    )
-  }
-
-  const CustomRightArrow = ({onClick, ...rest}) =>{
-    return(
-      <div className="w-16 h-16 rounded-xl flex justify-center items-center text-xl text-white bg-charcoal bg-opacity-80 absolute right-10 cursor-pointer transition-all scale-100 duration-500 hover:scale-110 hover:text-ruby" onClick={()=>onClick()}>
-        <FontAwesomeIcon icon={faChevronRight} size="2xl"/>
-      </div>
-    )
-  }
-
-  const CustomLeftArrow = ({onClick, ...rest}) =>{
-    console.log(rest)
-    return(
-      <div className="w-16 h-16 rounded-xl flex justify-center items-center text-xl text-white bg-charcoal bg-opacity-80 absolute left-10 cursor-pointer transition-all scale-100 duration-500 hover:scale-110 hover:text-ruby" onClick={()=>onClick()}>
-        <FontAwesomeIcon icon={faChevronLeft} size="2xl"/>
+        <div className={`absolute w-10 z-10 top-0 left-[5%] bg-red-500 ${height >=100 ? "rounded-b-none" : "rounded-b-full" } flex flex-col items-center justify-center`} style={{height: `${height}%`}}>
+        </div>
+        <div className="absolute bg-coal bg-opacity-30 h-full w-full grid grid-rows-3 z-0">
+            <div className="bg-gradient-to-t from-transparent to-coal to-70%">                       
+            </div>
+            <div className="flex w-2/3 justify-center items-center self-center justify-self-center text-7xl font-bold">
+              <h1 className="underline-offset-8s  underline">{title}</h1>
+            </div>
+            <div className="bg-gradient-to-b from-transparent to-coal to-70% flex items-center justify-center gap-10">
+                <div className="border border-soot rounded p-2 max-w-[50%] backdrop-blur-sm">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
+                </div>
+                <button className="flex items-center gap-2 bg-ruby rounded p-2 transition-transform duration-200 hover:scale-110">
+                    Read More
+                    <FontAwesomeIcon icon={faArrowRight}/>
+                </button>                        
+            </div>
+        </div>
       </div>
     )
   }
@@ -203,7 +125,7 @@ export default function Home() {
           </AnimatePresence>
 
 
-          <div>
+          <div className="self-center justify-self-center">
             <button className="flex justify-self-center self-center text-lg items-center gap-2 bg-ruby py-2 px-4 rounded transition-all duration-200 hover:bg-darkRuby active:scale-90"
               onClick={()=>setAbout(!aboutSelected)}
             >
@@ -214,59 +136,40 @@ export default function Home() {
 
 
       </div>
-      <div className="flex justify-center items-center bg-darkRuby h-32 text-6xl font-bold " ref={timelineRef}
-      >
-        <h1 className="border py-4 px-8 tracking-wider rounded">Timeline of Events</h1>
-      </div>
-
-      <Carousel 
-        responsive={responsive}
-        sliderClass="bg-green-500 flex justify-center top-20"
-        containerClass="h-screen"
-        customButtonGroup={<CustomButtongroup/>}
-        customRightArrow={<CustomRightArrow/>}
-        customLeftArrow={<CustomLeftArrow/>}
+        <div className="flex justify-center items-center bg-darkRuby h-32 text-6xl font-bold "
         >
-        <LandingTimelineSection title={"The State of the World"} year={"1936"} link={"/articles/1936-1940"} backgroundImage={"/images/treatyParis_France.jpg"} isInView={slidesInView}/>
-        <LandingTimelineSection title={"A Clash Between Hammers and Claws"} year={"1940"} link={"/articles/1940-1944"} backgroundImage={"/images/treatyLondon.jpg"} isInView={slidesInView}/>
-        <LandingTimelineSection title={"The War Beyond Europe"} year={"1944"} link={"/articles/1944-1948"} backgroundImage={"/images/russia.png"} isInView={slidesInView}/>
-        <LandingTimelineSection title={"The Eagle Reigns Supreme"} year={"1948"} link={"/articles/1948-1951"} backgroundImage={"/images/northAmerica.png"} isInView={slidesInView}/>
-
-      </Carousel>
-
-      <div className="flex justify-center items-center bg-darkRuby h-32 text-6xl font-bold mt-8"
-      >
+            <h1 className="border py-4 px-8 tracking-wider rounded">Timeline of Events</h1>
+        </div>
+        <div className="relative">
+            <div className="relative grid grid-rows-[100vh_100vh_100vh_100vh] z-10">
+                <TimelineSection date={1936} title={"The State of the World"} image={"/images/treatyLondon.jpg"}/>
+                <TimelineSection date={1940} title={"The Clash between Hammers and Claws"} image={"/images/image2.png"}/>
+                <TimelineSection date={1944} title={"The War Beyond Europe"} image={"/images/russia.png"}/>
+                <TimelineSection date={1948} title={"Rise of a New World Order"} image={"/images/northAmerica.png"} last/>
+            </div>        
+        </div>
+        <div className="flex justify-center items-center bg-darkRuby h-32 text-6xl font-bold ">
         <h1 className="border py-4 px-8 tracking-wider rounded">Peace Treaties</h1>
-      </div>      
-      <div className="h-screen bg-charcoal grid grid-rows-1 grid-cols-2 px-4">
-        <div className="w-full flex justify-center items-center h-full">
-          <div className="relative w-full h-5/6 p-4 border-2 rounded">
-            <div className="relative w-full h-full rounded">
-              <Image
-                src={"/images/KRworld1951V2.png"}
-                fill={true}
-                alt="peace treaty image"
-                style={{objectFit: "cover", borderRadius: "4px"}}
-              />               
-            </div>            
-          </div>
-
-         
-
         </div>
-        <div className="h-full flex flex-col justify-center items-center gap-10 border-coal">
-            <div className="w-9/12 p-4 text-xl border-2 rounded">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
+        <div className="bg-soot h-screen relative">
+            <div className="absolute top-0 left-0 w-full h-screen bg-coal z-10 bg-opacity-30"></div>
+            <div className="absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-transparent to-coal z-20 flex justify-center items-center">
+                <div className="max-w-[50%] border-t-2 border-l-2 border-r-2 p-4 flex flex-col justify-center items-center gap-4 border-soot backdrop-blur-sm rounded-tl rounded-tr">
+                    <p className="text-2xl">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.
+                    </p>
+                    <button className="flex items-center gap-4 text-2xl font-bold bg-ruby py-2 px-4 rounded transition-transform duration-200 hover:scale-110">
+                        <p className="text-2xl">See More</p>
+                        <FontAwesomeIcon icon={faArrowRight}/>
+                    </button>
+                </div>
             </div>
-            <motion.div              
-              className="flex bg-ruby rounded items-center text-xl gap-2 px-4 py-2 duration-200 hover:scale-110 cursor-pointer" onClick={()=>router.push("/articles/peace-treaties")}
-              >
-                <h3 className="font-bold tracking-wide">Read More</h3>
-                <FontAwesomeIcon icon={faArrowRight}/>
-            </motion.div>
+            <Image src={"/images/KRworld1951V2.png"} fill style={{objectFit: "cover", objectPosition:"center"}} alt="peace treaty image"/>
         </div>
-      </div>
 
+
+
+     
 
     </div>
   );
