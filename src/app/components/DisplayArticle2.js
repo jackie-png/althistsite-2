@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Markdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 
@@ -20,7 +21,14 @@ export default function DisplayArticle2({data}){
                         ),
                         p: ({node, ...props}) =>(
                             <p className="indent-16 text-coal text-xl max-w-[1200px] self-center leading-[3rem]" {...props}/>
-                        )
+                        ),
+                        // img: ({node, ...props}) => {
+                        //     const {src, alt} = props
+                        //     return (<div>
+                        //         <img src={src} alt={alt}/>
+                        //         <p>{alt}</p>
+                        //     </div>)
+                        // }
                     }
                 }
                 >{data}</Markdown>            

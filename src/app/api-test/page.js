@@ -7,7 +7,7 @@ const sql = postgres(process.env.POSTGRES_URL, {ssl: "require"});
 export default async function Page(){
     
     async function fetchData(){
-        const data = sql`select * from articles where article_name = '1940-1944'`
+        const data = sql`select * from articles where article_name = '1948-1951'`
         return data
     }
 
