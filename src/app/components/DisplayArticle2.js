@@ -22,13 +22,14 @@ export default function DisplayArticle2({data}){
                         p: ({node, ...props}) =>(
                             <p className="indent-16 text-coal text-xl max-w-[1200px] self-center leading-[3rem]" {...props}/>
                         ),
-                        // img: ({node, ...props}) => {
-                        //     const {src, alt} = props
-                        //     return (<div>
-                        //         <img src={src} alt={alt}/>
-                        //         <p>{alt}</p>
-                        //     </div>)
-                        // }
+                        img: ({node, ...props}) => {
+                            const {src, alt} = props
+                            return (
+                            <div className="text-soot flex flex-col">
+                                <img src={src} alt={alt} className="rounded-lg shadow-lg border-soot border-2 border-opacity-50"/>
+                                {alt}
+                            </div>)
+                        }
                     }
                 }
                 >{data}</Markdown>            
