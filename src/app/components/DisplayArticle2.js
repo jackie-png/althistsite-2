@@ -25,7 +25,7 @@ export default function DisplayArticle2({data}){
                         img: ({node, ...props}) => {
                             const {src, alt} = props
                             return (
-                            <div className="text-soot flex flex-col">
+                            <div className="text-soot flex flex-col italic">
                                 <img src={src} alt={alt} className="rounded-lg shadow-lg border-soot border-2 border-opacity-50"/>
                                 {alt}
                             </div>)
