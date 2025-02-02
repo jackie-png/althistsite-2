@@ -116,46 +116,57 @@ export default function Navbar(){
                                 <div className="flex justify-center items-center w-20 h-20">
                                     <TimelineCircle/>
                                 </div>
-                                <motion.div 
+                                <motion.button 
                                     initial={{opacity:0, y: -30}}
                                     animate={{opacity:1, y: 0}}
                                     transition={{
                                         delay: 0.7,
                                         duration: 0.5
                                     }}
-                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1">
-                                    <Link href="/articles/1936-1940" className="w-full h-full flex items-center justify-center">1936</Link>
-                                </motion.div>
-                                <motion.div 
+                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1"
+                                    onClick={()=>router.push("/1936-1940")}
+
+                                    >
+                                    <h1 className="w-full h-full flex items-center justify-center">1936</h1>
+                                </motion.button>
+                                <motion.button 
                                     initial={{opacity:0, y: -30}}
                                     animate={{opacity:1, y: 0}}
                                     transition={{
                                         delay: 0.8,
                                         duration: 0.5
                                     }}
-                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1">
-                                    <Link href="/articles/1940-1944" className="w-full h-full flex items-center justify-center">1940</Link>
-                                </motion.div>
-                                <motion.div
+                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1"
+                                    onClick={()=>router.push("/1940-1944")}
+                                    >
+                                    <h1 className="w-full h-full flex items-center justify-center">1940</h1>
+                                </motion.button>
+                                <motion.button
                                     initial={{opacity:0, y: -30}}
                                     animate={{opacity:1, y: 0}}
                                     transition={{
                                         delay: 0.9,
                                         duration: 0.5
                                     }}
-                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1">
-                                    <Link href="/articles/1944-1948" className="w-full h-full flex items-center justify-center">1944</Link>
-                                </motion.div>
-                                <motion.div
+                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1"
+                                    onClick={()=>router.push("/1944-1948")}
+
+                                    >
+                                    <h1 className="w-full h-full flex items-center justify-center">1944</h1>
+                                </motion.button>
+                                <motion.button
                                     initial={{opacity:0, y: -30}}
                                     animate={{opacity:1, y: 0}}
                                     transition={{
                                         delay: 1,
                                         duration: 0.5
                                     }}
-                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1">
-                                    <Link href="/articles/1948-1951" className="w-full h-full flex items-center justify-center">1948</Link>
-                                </motion.div>
+                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1"
+                                    onClick={()=>router.push("/1948-1951")}
+
+                                    >
+                                    <h1 className="w-full h-full flex items-center justify-center">1948</h1>
+                                </motion.button>
                                 <motion.div 
                                     initial={{opacity:0, translateX: -50}}
                                     animate={{opacity:1, translateX: 0}}
