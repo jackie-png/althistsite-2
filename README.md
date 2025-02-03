@@ -28,3 +28,14 @@ There are 4 timeline articles that are available to read
 7. 1948-1951: Rise of the New World Order
    - Gives a detailed overview of the final days of the Third Weltkrieg (Third World War) from the German's perspective. Covering events such as the Invasion of America.
 
+### Peace Treaties 
+Here are a list of all the treaties
+- Treaty of Paris
+- Treaty of London
+- Treaty of Moscow
+- Treaty of Tokyo
+- Treaty of Delhi
+- Treaty of Beijing
+- Treaty of Bangkok
+- Treaty of Washington
+- Treaty of Ottawa
