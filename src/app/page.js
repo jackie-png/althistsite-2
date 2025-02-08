@@ -179,7 +179,7 @@ export default function Home() {
 
 
           <div className="self-center justify-self-center">
-            <button className="flex justify-self-center self-center text-lg items-center gap-2 bg-ruby py-2 px-4 rounded transition-all duration-200 hover:bg-darkRuby active:scale-90"
+            <button className="flex justify-self-center self-center text-sm items-center gap-2 bg-ruby py-2 px-4 rounded transition-all duration-200 hover:bg-darkRuby active:scale-90"
               onClick={()=>setAbout(!aboutSelected)}
             >
               About

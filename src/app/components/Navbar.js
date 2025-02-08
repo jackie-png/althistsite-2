@@ -45,27 +45,27 @@ export default function Navbar(){
     return(
         <div className="sticky top-0 z-50">            
             {/**upper navbar */}
-            <div className={`bg-coal text-snow relative z-50 flex flex-col px-4 py-6 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
+            <div className={`bg-coal text-snow relative z-50 flex flex-col px-4 py-4 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
                 <div className="flex items-center gap-8">
-                    <div className="h-16 w-16 flex items-center justify-center cursor-pointer" onClick={()=>router.push("/")}>
+                    <div className="h-12 w-12 flex items-center justify-center cursor-pointer" onClick={()=>router.push("/")}>
                         <Logo/>
                     </div>
-                    <div className="flex items-center justify-center border-solid border-2 border-soot rounded h-14 px-4 ">
+                    <div className="flex items-center justify-center border-solid border-2 border-soot rounded h-12 px-4 cursor-pointer" onClick={()=>router.push("/")}>
                         <h1 className="text-xl">Rise of the German Hegemony</h1>
                     </div>
-                    <div className={`gap-8 h-16 flex flex-grow border-solid border-2 border-soot rounded items-center justify-center select-none`}>
+                    <div className={`gap-8 h-12 flex flex-grow border-solid border-2 border-soot rounded items-center justify-center select-none`}>
                         <div 
-                            className={`${menuOption[0] ? "bg-ruby" : "bg-none"} flex gap-2 px-2 border-solid border-2 ${menuOption[0] ? "border-darkRuby" : "border-soot"} rounded h-9 items-center justify-center hover:border-ruby hover:cursor-pointer`}
+                            className={`${menuOption[0] ? "bg-ruby" : "bg-none"} flex gap-2 px-2 border-solid border-2 ${menuOption[0] ? "border-darkRuby" : "border-soot"} rounded h-6 items-center justify-center hover:border-ruby hover:cursor-pointer`}
                             onClick={()=>handleDropdownOpen(0)}>
-                            <h2>Timeline</h2>
+                            <h2 className="text-sm">Timeline</h2>
                             <div className={`flex justify-center items-center w-5 h-5 ${menuOption[0] ? "text-snow" : "text-ruby"}`}>
                                 <FontAwesomeIcon icon={faChevronDown}/>
                             </div>
                         </div>
                         <div 
-                            className={`${menuOption[1] ? "bg-ruby" : "bg-none"} flex gap-2 px-2 border-solid border-2 ${menuOption[1] ? "border-darkRuby" : "border-soot"} rounded h-9 items-center justify-center select-none hover:border-ruby hover:cursor-pointer`} 
-                            onClick={()=>router.push("/articles/peace-treaties")}>
-                            <h2>Peace Treaties</h2>
+                            className={`${menuOption[1] ? "bg-ruby" : "bg-none"} flex gap-2 px-2 border-solid border-2 ${menuOption[1] ? "border-darkRuby" : "border-soot"} rounded h-6 items-center justify-center select-none hover:border-ruby hover:cursor-pointer`} 
+                            onClick={()=>router.push("/peace-treaties")}>
+                            <h2 className="text-sm">Peace Treaties</h2>
                             <div className={`flex justify-center items-center w-5 h-5 ${menuOption[1] ? "text-snow" : "text-ruby"}`}>
                                 <FontAwesomeIcon icon={faArrowRight}/>
                             </div>

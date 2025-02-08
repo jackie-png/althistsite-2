@@ -26,7 +26,7 @@ export default function page(){
                         duration: 0.3,
                         ease: "easeInOut"
                     }}
-                    className="text-6xl tracking-wide font-bold">
+                    className="text-4xl tracking-wide font-bold">
                     {currentHovered}
                 </motion.h1>
             </div>

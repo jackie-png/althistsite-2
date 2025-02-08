@@ -5,12 +5,12 @@ import Logo from "./Logo";
 export default function Footer(){
     const router = useRouter()
     return (
-        <div className="bg-coal h-40 text-snow flex items-center gap-8 px-4 border-t-solid border-t border-t-soot">
-            <div className="h-16 w-16">
+        <div className="bg-coal h-28 text-snow flex items-center gap-8 px-4 border-t-solid border-t border-t-soot">
+            <div className="h-16 w-16 cursor-pointer" onClick={()=>router.push("/")}>
                 <Logo/>                
             </div>
 
-            <div className="flex items-center border-solid border border-soot rounded h-4/6 px-4">
+            <div className="flex items-center border-solid border border-soot rounded h-4/6 px-4 cursor-pointer" onClick={()=>router.push("/")}>
                 <h1 className="text-2xl">Rise of the German Hegemony</h1>
             </div>
             <div className="flex justify-center gap-8 flex-grow items-center border-solid border border-soot rounded h-4/6"
