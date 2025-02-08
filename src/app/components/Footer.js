@@ -1,11 +1,15 @@
 import { useRouter } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEmpire } from "@fortawesome/free-brands-svg-icons";
+import Logo from "./Logo";
 export default function Footer(){
     const router = useRouter()
     return (
         <div className="bg-coal h-40 text-snow flex items-center gap-8 px-4 border-t-solid border-t border-t-soot">
-            <FontAwesomeIcon icon={faEmpire} size="4x"/>
+            <div className="h-16 w-16">
+                <Logo/>                
+            </div>
+
             <div className="flex items-center border-solid border border-soot rounded h-4/6 px-4">
                 <h1 className="text-2xl">Rise of the German Hegemony</h1>
             </div>

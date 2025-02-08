@@ -8,6 +8,7 @@ import { AnimatePresence, keyframes, useInView, useScroll, useTransform } from "
 import { motion } from "framer-motion";
 import "react-multi-carousel/lib/styles.css"
 import { useRouter } from "next/navigation";
+import Logo from "./components/Logo";
 
 export default function Home() {
 
@@ -146,8 +147,10 @@ export default function Home() {
             backgroundImage: 'url("/images/KRworld1951V2_1_3.jpg")',
             backgroundPosition: "center"
         }}>
-          <div className="text-[290px] row-span-2 justify-self-center">
-            <FontAwesomeIcon icon={faEmpire} size="lg"/>            
+          <div className="text-[290px] row-span-2 justify-self-center flex items-center">
+            <div className="h-[300px] w-[300px] flex self-center  ">
+              <Logo/>              
+            </div>
           </div>
 
           <AnimatePresence>
@@ -156,7 +159,8 @@ export default function Home() {
               initial={{opacity: 0}}
               animate={{opacity: 1}}
               transition={{duration: 0.2}}
-              exit={{opacity: 0}}                className="bg-coal flex flex-col row-span-1 w-9/12 h-full bg-opacity-50 rounded self-center gap-4 justify-self-center px-8 py-4">
+              exit={{opacity: 0}}
+              className="bg-coal flex flex-col row-span-1 w-9/12 h-full bg-opacity-50 rounded self-center gap-4 justify-self-center px-8 py-4">
                 <h1 className="text-2xl font-bold text-center">About this website</h1>
                 <h3 className="mb-4 text-lg">This was a Hearts of Iron IV campaign that I enjoyed a lot so I turned it into a website and documented it like a history website in this world</h3>
                 <h3 className="text-lg">The campaign took place in the mod Kaiserreich which explores a world built on the premise of “What if Germany won World War 1?”. When the devs updated the German focus tree I had such a fun time conquering the world, so much that this was made as a memento.</h3>

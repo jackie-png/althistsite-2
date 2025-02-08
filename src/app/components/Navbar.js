@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { TimelineCircle } from "./TimelineCircle";
 import { TimelineTriangle } from "./TimelineTriangle";
 import { useRouter } from "next/navigation";
+import Logo from "./Logo";
 import Link from "next/link";
 
 export default function Navbar(){
@@ -47,7 +48,7 @@ export default function Navbar(){
             <div className={`bg-coal text-snow relative z-50 flex flex-col px-4 py-6 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
                 <div className="flex items-center gap-8">
                     <div className="h-16 w-16 flex items-center justify-center cursor-pointer" onClick={()=>router.push("/")}>
-                        <FontAwesomeIcon icon={faEmpire} size="4x"/>
+                        <Logo/>
                     </div>
                     <div className="flex items-center justify-center border-solid border-2 border-soot rounded h-14 px-4 ">
                         <h1 className="text-xl">Rise of the German Hegemony</h1>
