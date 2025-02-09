@@ -52,7 +52,7 @@ export default function Navbar(){
                     delay: delay,
                     duration: duration
                 }}
-                className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-full w-20 lg:w-32 py-1"
+                className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-full w-20 lg:w-32 py-1 text-coal font-bold tracking-wide"
                 onClick={()=>router.push(link)}
                 >
                 <h1 className="w-full h-full flex items-center justify-center">{date}</h1>
@@ -105,25 +105,38 @@ export default function Navbar(){
                         duration:0.3,
                         ease:"easeInOut",
                     }}
-                    className={`w-full bg-coal p-4`}>
-                    {menuOption[0] && 
-                        <div className="grid grid-rows-2">
-                            <motion.div 
-                                initial={{scale:0}}
-                                animate={{scale:1}}
-                                transition={{
-                                    duration: 0.3,
-                                    delay: 0.3
-                                }}
-                                className="flex text-snow justify-center">
-                                <div className="border-soot border-2 border-solid py-2 px-8 rounded text-2xl">
-                                    <h2>Timeline of Major Years</h2>
-                                </div>
-                            </motion.div>   
-                            hi there 
+                    className={`w-full bg-coal grid grid-rows-[6rem_6rem] `}>
+                    <motion.div 
+                        initial={{scale:0}}
+                        animate={{scale:1}}
+                        transition={{
+                            duration: 0.3,
+                            delay: 0.3
+                        }}
+                        className="flex text-snow justify-center">
+                        <div className="border-soot border-2 border-solid py-2 px-8 rounded text-2xl h-fit self-center">
+                            <h2>Timeline of Major Years</h2>
                         </div>
-                    }      
+                    </motion.div>   
+                    <div className="w-full relative self-center">
+                        <div className="bg-ruby w-[96%] h-4 absolute top-0 ml-2"></div>
+                        <div className="w-full h-4 absolute top-0 flex items-center justify-between">
+                            <div className="h-16 w-16 rounded-full bg-darkRuby flex items-center justify-center">
+                              <div className="h-10 w-10 rounded-full bg-white"></div>  
+                            </div>
+                            <TimelineButton link={"/1936-1940"} date={1936} delay={0.7} duration={0.5}/>
+                            <TimelineButton link={"/1940-1944"} date={1940} delay={0.8} duration={0.5}/>
 
+                            <TimelineButton link={"/1944-1948"} date={1944} delay={0.9} duration={0.5}/>
+
+                            <TimelineButton link={"/1948-1951"} date={1948} delay={1} duration={0.5}/>
+
+                            <div className="w-20 h-20 flex justify-center items-center ">
+                                <TimelineTriangle/>
+                            </div>
+                        </div>
+
+                    </div>
                 </motion.div>}                
             </AnimatePresence>
 

@@ -16,7 +16,7 @@ export default function page(){
     },[currentHovered])
     return(
         <div>
-            <div className="p-4 bg-darkRuby flex justify-center text-snow">
+            <div className="pt-24 pb-4 bg-darkRuby flex justify-center text-snow">
                 
                 <motion.h1 
                     key={currentHovered}
