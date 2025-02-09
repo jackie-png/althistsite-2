@@ -43,7 +43,7 @@ export default function Home() {
         {!last && <div className="absolute z-20 bottom-0 w-full h-1 flex justify-center items-center">
           <motion.div 
             initial={{width: 0}}
-            animate={{width: (isInView ? "33%" : 0)}}
+            animate={{width: (isInView ? "40%" : 0)}}
             transition={{
               delay: 0.8,
               duration: 0.5,
@@ -54,7 +54,7 @@ export default function Home() {
           </motion.div>
         </div>}
         <Image src={image} alt="landingpageimage" fill style={{objectFit: "cover"}}/>
-        <div className={`absolute w-10 z-20 top-0 left-[5%] ${height >=100 ? "rounded-b-none" : "rounded-b-full" } flex flex-col items-center justify-center`} style={{height: `100%`}}>
+        <div className={`absolute w-10 z-20 top-0 left-[5%] ${height >=100 ? "rounded-b-none" : "rounded-b-full" } hidden lg:flex flex-col items-center justify-center`} style={{height: `100%`}}>
             <motion.div 
               initial={{scale: 0}}
               animate={{
@@ -74,7 +74,7 @@ export default function Home() {
                 </motion.div>
             </motion.div>
         </div>
-        <div className={`absolute w-10 z-10 top-0 left-[5%] bg-ruby ${height >=100 ? "rounded-b-none" : "rounded-b-full" } flex flex-col items-center justify-center`} style={{height: `${height}%`}}>
+        <div className={`absolute w-10 z-10 top-0 left-[5%] bg-ruby ${height >=100 ? "rounded-b-none" : "rounded-b-full" } hidden lg:flex flex-col items-center justify-center`} style={{height: `${height}%`}}>
         </div>
         <div className="absolute bg-coal bg-opacity-30 h-full w-full grid grid-rows-3 z-0">
             <div className="bg-gradient-to-t from-transparent to-coal to-70%">                       
@@ -92,10 +92,10 @@ export default function Home() {
                 duration: 0.5,
                 delay: 0.3
               }}
-              className="flex w-2/3 justify-center items-center self-center justify-self-center text-4xl font-bold">
+              className="flex w-2/3 justify-center items-center self-center justify-self-center md:text-nowrap text-xl md:text-3xl lg:text-4xl font-bold">
               <h1 className="underline-offset-8s underline">{title}</h1>
             </motion.div>
-            <div className="bg-gradient-to-b from-transparent to-coal to-70% flex items-center justify-center gap-10">
+            <div className="bg-gradient-to-b from-transparent to-coal to-70% flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10">
                 <motion.div 
                   initial={{
                     opacity: 0,
@@ -110,8 +110,8 @@ export default function Home() {
                     duration: 0.5,
                     ease: "easeInOut"
                   }}
-                  className="border border-soot rounded p-2 max-w-[50%] backdrop-blur-sm">
-                    <p className="text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
+                  className="border border-soot rounded p-2 max-w-[90%] md:max-w-[50%] backdrop-blur-sm">
+                    <p className="text-[0.45rem] md:text-[0.5rem] lg:text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
                 </motion.div>
                 <motion.button
                   initial={{
@@ -126,7 +126,7 @@ export default function Home() {
                     ease: "easeInOut"
                   }}
                   onClick={()=>router.push(link)}
-                  className="flex items-center gap-2 bg-ruby rounded p-2 transition-transform duration-200 text-xs hover:scale-110">
+                  className="flex items-center gap-2 bg-ruby rounded p-2 transition-transform duration-200 text-[0.6rem] lg:text-xs hover:scale-110">
                     Read More
                     <FontAwesomeIcon icon={faArrowRight}/>
                 </motion.button>                        
@@ -189,9 +189,9 @@ export default function Home() {
 
 
       </div>
-        <div className="flex justify-center items-center bg-darkRuby h-32 text-4xl font-bold "
+        <div className="flex justify-center items-center bg-darkRuby h-32 text-3xl lg:text-4xl font-bold "
         >
-            <h1 className="border py-4 px-8 tracking-wider rounded">Timeline of Events</h1>
+          <h1 className="border py-4 px-8 tracking-wider rounded">Timeline of Events</h1>
         </div>
         <div className="relative">
             <div className="relative grid grid-rows-[max-content_max-content_max-content_max-content] z-10">
@@ -201,14 +201,14 @@ export default function Home() {
                 <TimelineSection date={1948} title={"Rise of a New World Order"} image={"/images/northAmerica.png"} link={"/1948-1951"} last/>
             </div>        
         </div>
-        <div className="flex justify-center items-center bg-darkRuby h-32 text-4xl font-bold ">
+        <div className="flex justify-center items-center bg-darkRuby h-32 text-3xl lg:text-4xl font-bold ">
         <h1 className="border py-4 px-8 tracking-wider rounded">Peace Treaties</h1>
         </div>
         <div className="bg-soot h-screen relative">
             <div className="absolute top-0 left-0 w-full h-screen bg-coal z-10 bg-opacity-30"></div>
             <div className="absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-transparent to-coal z-20 flex justify-center items-center">
                 <div className="max-w-[50%] border-t-2 border-l-2 border-r-2 p-4 flex flex-col justify-center items-center gap-4 border-soot backdrop-blur-sm rounded-tl rounded-tr">
-                    <p className="text-sm">
+                    <p className=" text-xs lg:text-sm">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.
                     </p>
                     <button 
