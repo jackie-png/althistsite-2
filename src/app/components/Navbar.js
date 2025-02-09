@@ -42,10 +42,27 @@ export default function Navbar(){
         setMenuOption(newOption);
 
     }
+
+    function TimelineButton({link, date, delay, duration}){
+        return(
+            <motion.button 
+                initial={{opacity:0, y: -30}}
+                animate={{opacity:1, y: 0}}
+                transition={{
+                    delay: delay,
+                    duration: duration
+                }}
+                className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-full w-20 lg:w-32 py-1"
+                onClick={()=>router.push(link)}
+                >
+                <h1 className="w-full h-full flex items-center justify-center">{date}</h1>
+            </motion.button>
+        )
+    }
     return(
-        <div className="sticky top-0 z-50">            
+        <div className="absolute w-full top-0 z-50">            
             {/**upper navbar */}
-            <div className={`bg-coal text-snow relative z-50 flex flex-col px-4 py-4 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
+            <div className={`bg-coal text-snow relative z-50 h-20 flex flex-col px-4 py-4 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
                 <div className="flex items-center gap-8">
                     <div className="h-12 w-12 flex items-center justify-center cursor-pointer" onClick={()=>router.push("/")}>
                         <Logo/>
@@ -59,7 +76,7 @@ export default function Navbar(){
                             onClick={()=>handleDropdownOpen(0)}>
                             <h2 className="text-sm">Timeline</h2>
                             <div className={`flex justify-center items-center w-5 h-5 ${menuOption[0] ? "text-snow" : "text-ruby"}`}>
-                                <FontAwesomeIcon icon={faChevronDown}/>
+                                <FontAwesomeIcon icon={faChevronDown} className={`transition-all duration-300 ease-in-out ${menuOption[0] ? "rotate-180" : "rotate-0"}`}/>
                             </div>
                         </div>
                         <div 
@@ -78,8 +95,8 @@ export default function Navbar(){
                 {/**dropdown*/}
                 {dropdownOpen && 
                 <motion.div 
-                    initial={{height:"0px", opacity:0}}
-                    animate={{height:(menuOption[0] ? "224px" : menuOption[1] ? "342px" : "0px"), opacity: 1}}
+                    initial={{height:0, opacity:0}}
+                    animate={{height:(menuOption[0] ? "100%" : "0px"), opacity: 1}}
                     exit={{
                         height:"0px",
                         opacity: 0
@@ -88,10 +105,9 @@ export default function Navbar(){
                         duration:0.3,
                         ease:"easeInOut",
                     }}
-                    className={`absolute w-full bg-coal p-4`}>
+                    className={`w-full bg-coal p-4`}>
                     {menuOption[0] && 
-                        <motion.div 
-                            className="relative">
+                        <div className="grid grid-rows-2">
                             <motion.div 
                                 initial={{scale:0}}
                                 animate={{scale:1}}
@@ -103,83 +119,9 @@ export default function Navbar(){
                                 <div className="border-soot border-2 border-solid py-2 px-8 rounded text-2xl">
                                     <h2>Timeline of Major Years</h2>
                                 </div>
-                            </motion.div>
-                            <motion.div 
-                                initial={{width:"0%"}}
-                                animate={{width:"95%"}}
-                                transition={{
-                                    duration: 0.5,
-                                    delay: 0.6
-                                }}
-                                className="h-4 bg-ruby ml-2 relative top-20">
-                            </motion.div>
-                            <div className="flex text-coal text-xl font-bold justify-between relative z-10 top-8">
-                                <div className="flex justify-center items-center w-20 h-20">
-                                    <TimelineCircle/>
-                                </div>
-                                <motion.button 
-                                    initial={{opacity:0, y: -30}}
-                                    animate={{opacity:1, y: 0}}
-                                    transition={{
-                                        delay: 0.7,
-                                        duration: 0.5
-                                    }}
-                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1"
-                                    onClick={()=>router.push("/1936-1940")}
-
-                                    >
-                                    <h1 className="w-full h-full flex items-center justify-center">1936</h1>
-                                </motion.button>
-                                <motion.button 
-                                    initial={{opacity:0, y: -30}}
-                                    animate={{opacity:1, y: 0}}
-                                    transition={{
-                                        delay: 0.8,
-                                        duration: 0.5
-                                    }}
-                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1"
-                                    onClick={()=>router.push("/1940-1944")}
-                                    >
-                                    <h1 className="w-full h-full flex items-center justify-center">1940</h1>
-                                </motion.button>
-                                <motion.button
-                                    initial={{opacity:0, y: -30}}
-                                    animate={{opacity:1, y: 0}}
-                                    transition={{
-                                        delay: 0.9,
-                                        duration: 0.5
-                                    }}
-                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1"
-                                    onClick={()=>router.push("/1944-1948")}
-
-                                    >
-                                    <h1 className="w-full h-full flex items-center justify-center">1944</h1>
-                                </motion.button>
-                                <motion.button
-                                    initial={{opacity:0, y: -30}}
-                                    animate={{opacity:1, y: 0}}
-                                    transition={{
-                                        delay: 1,
-                                        duration: 0.5
-                                    }}
-                                    className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-md w-32 py-1"
-                                    onClick={()=>router.push("/1948-1951")}
-
-                                    >
-                                    <h1 className="w-full h-full flex items-center justify-center">1948</h1>
-                                </motion.button>
-                                <motion.div 
-                                    initial={{opacity:0, translateX: -50}}
-                                    animate={{opacity:1, translateX: 0}}
-                                    transition={{
-                                        delay: 0.7,
-                                        duration: 0.5
-                                    }}
-                                    className="w-32 h-32">
-                                    <TimelineTriangle/>
-                                </motion.div>
-                            </div>                        
-                        </motion.div>
+                            </motion.div>   
+                            hi there 
+                        </div>
                     }      
 
                 </motion.div>}                
