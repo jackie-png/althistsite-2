@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEmpire } from "@fortawesome/free-brands-svg-icons";
-import { faArrowRight, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faBars, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { AnimatePresence, motion } from "framer-motion";
 import { TimelineCircle } from "./TimelineCircle";
 import { TimelineTriangle } from "./TimelineTriangle";
@@ -11,37 +11,33 @@ import Logo from "./Logo";
 import Link from "next/link";
 
 export default function Navbar(){
-    const [timelineOpen, setTimelineOpen] = useState(false)
-    const [dropdownOpen, setDropdown] = useState(false)
-    const [peaceOpen, setPeaceOpen] = useState(false)
-    const [menuOption, setMenuOption] = useState([false,false]) // timeline dropdown or peace treaty dropdown
+    const [timelineOpen, setTimelineOpen] = useState(false);
+    const [dropdownOpen, setDropdown] = useState(false);
+    const [isMobile, setMobile] = useState(false);
+
+
+
     const router = useRouter();
-    useEffect(()=>{
-        console.log(`dropdown: ${dropdownOpen}`);
-        console.log(`timeline: ${menuOption[0]}`);
-        console.log(`peace: ${menuOption[1]}`);
-    },[dropdownOpen, menuOption])
 
     useEffect(()=>{
-        if (!menuOption[0] && !menuOption[1]){
-            setDropdown(false);
-        } else {
-            setDropdown(true);
+        function checkMobile(){
+            console.log(window.innerWidth)
+            if (window.innerWidth < 768){
+                setMobile(true)
+            } else {
+                setMobile(false)
+            }
         }
-    },[menuOption])
 
-    function handleDropdownOpen(whichOpened){
-        let newOption = [...menuOption];
-        if (whichOpened === 0){
-            newOption[0] = !newOption[0]
-            newOption[1] = false
-        } else {
-            newOption[0] = false
-            newOption[1] = !newOption[1]
+        checkMobile();
+
+        window.addEventListener("resize", checkMobile)
+
+        return ()=>{
+            window.removeEventListener("resize", checkMobile)
         }
-        setMenuOption(newOption);
+    },[])
 
-    }
 
     function TimelineButton({link, date, delay, duration}){
         return(
@@ -53,12 +49,16 @@ export default function Navbar(){
                     duration: duration
                 }}
                 className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-full w-20 lg:w-32 py-1 text-coal font-bold tracking-wide"
-                onClick={()=>router.push(link)}
+                onClick={()=>{
+                    router.push(link);
+                    setDropdown(!dropdownOpen)
+                }}
                 >
                 <h1 className="w-full h-full flex items-center justify-center">{date}</h1>
             </motion.button>
         )
     }
+
     return(
         <div className="absolute w-full top-0 z-50">            
             {/**upper navbar */}
@@ -70,33 +70,41 @@ export default function Navbar(){
                     <div className="flex items-center justify-center border-solid border-2 border-soot rounded h-12 px-4 cursor-pointer" onClick={()=>router.push("/")}>
                         <h1 className="text-xl">Rise of the German Hegemony</h1>
                     </div>
-                    <div className={`gap-8 h-12 flex flex-grow border-solid border-2 border-soot rounded items-center justify-center select-none`}>
-                        <div 
-                            className={`${menuOption[0] ? "bg-ruby" : "bg-none"} flex gap-2 px-2 border-solid border-2 ${menuOption[0] ? "border-darkRuby" : "border-soot"} rounded h-6 items-center justify-center hover:border-ruby hover:cursor-pointer`}
-                            onClick={()=>handleDropdownOpen(0)}>
-                            <h2 className="text-sm">Timeline</h2>
-                            <div className={`flex justify-center items-center w-5 h-5 ${menuOption[0] ? "text-snow" : "text-ruby"}`}>
-                                <FontAwesomeIcon icon={faChevronDown} className={`transition-all duration-300 ease-in-out ${menuOption[0] ? "rotate-180" : "rotate-0"}`}/>
+                    {!isMobile ? <div className={`gap-8 h-12 flex flex-grow border-solid border-2 border-soot rounded items-center justify-center select-none`}>
+                            <div 
+                                className={`flex gap-2 px-2 border-solid border-2 ${dropdownOpen ? "bg-ruby" : "bg-none"} ${dropdownOpen ? "border-darkRuby" : "border-soot"} rounded h-6 items-center justify-center hover:border-ruby hover:cursor-pointer`}
+                                onClick={()=>setDropdown(!dropdownOpen)}>
+                                <h2 className="text-sm">Timeline</h2>
+                                <div className={`flex justify-center items-center w-5 h-5 text-snow`}>
+                                    <FontAwesomeIcon icon={faChevronDown} className={`transition-all duration-300 ease-in-out ${dropdownOpen ? "rotate-180" : "rotate-0"}`}/>
+                                </div>
+                            </div>
+                            <div 
+                                className={`flex gap-2 px-2 border-solid border-2 border-soot rounded h-6 items-center justify-center select-none hover:border-ruby hover:cursor-pointer`} 
+                                onClick={()=>router.push("/peace-treaties")}>
+                                <h2 className="text-sm">Peace Treaties</h2>
+                                <div className={`flex justify-center items-center w-5 h-5 "text-ruby"`}>
+                                    <FontAwesomeIcon icon={faArrowRight}/>
+                                </div>
                             </div>
                         </div>
-                        <div 
-                            className={`${menuOption[1] ? "bg-ruby" : "bg-none"} flex gap-2 px-2 border-solid border-2 ${menuOption[1] ? "border-darkRuby" : "border-soot"} rounded h-6 items-center justify-center select-none hover:border-ruby hover:cursor-pointer`} 
-                            onClick={()=>router.push("/peace-treaties")}>
-                            <h2 className="text-sm">Peace Treaties</h2>
-                            <div className={`flex justify-center items-center w-5 h-5 ${menuOption[1] ? "text-snow" : "text-ruby"}`}>
-                                <FontAwesomeIcon icon={faArrowRight}/>
-                            </div>
-                        </div>
-                    </div>
+                        :
+                        <button
+                            onClick={()=>setDropdown(!dropdownOpen)}
+                        >
+                            <FontAwesomeIcon icon={faBars}/>
+                        </button>
+                    
+                    }
 
                 </div>                
             </div>
             <AnimatePresence>
                 {/**dropdown*/}
                 {dropdownOpen && 
-                <motion.div 
+                (!isMobile ? <motion.div 
                     initial={{height:0, opacity:0}}
-                    animate={{height:(menuOption[0] ? "100%" : "0px"), opacity: 1}}
+                    animate={{height:(dropdownOpen ? "100%" : "0px"), opacity: 1}}
                     exit={{
                         height:"0px",
                         opacity: 0
@@ -137,7 +145,39 @@ export default function Navbar(){
                         </div>
 
                     </div>
-                </motion.div>}                
+                </motion.div>:
+                <motion.div 
+                    initial={{height:0, opacity:0}}
+                    animate={{height:(dropdownOpen ? "100%" : "0px"), opacity: 1}}
+                    exit={{
+                        height:"0px",
+                        opacity: 0
+                    }}
+                    transition={{
+                        duration:0.3,
+                        ease:"easeInOut",
+                    }}
+                    className={`w-full bg-coal grid grid-rows-2 `}>
+                    <div className="flex flex-col justify-center p-2 w-full">
+                        <div className="text-lg flex items-center justify-between gap-2" onClick={()=>setTimelineOpen(!timelineOpen)}>
+                            <h1>Timeline</h1>
+                            <div className={`${timelineOpen ? "rotate-180" : "rotate-0"} duration-200 transition-all`}>
+                                <FontAwesomeIcon icon={faChevronDown} className="text-ruby"/>
+                            </div>
+                        </div>
+                        {timelineOpen && <div>
+                            hi there
+                        </div>}
+                    </div>
+                    <div 
+                        className="flex items-center w-full justify-between gap-2 text-lg p-2 border-y-soot border-y-2 border-y-solid"
+                        onClick={()=>{setDropdown(!dropdownOpen);router.push("/peace-treaties")}}
+                        >
+                        <h1>Peace Treaties</h1>
+                        <FontAwesomeIcon icon={faArrowRight} className="text-ruby"/>
+                    </div>
+                </motion.div>)
+            }                
             </AnimatePresence>
 
         </div>
