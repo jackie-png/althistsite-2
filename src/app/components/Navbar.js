@@ -157,17 +157,42 @@ export default function Navbar(){
                         duration:0.3,
                         ease:"easeInOut",
                     }}
-                    className={`w-full bg-coal grid grid-rows-2 `}>
-                    <div className="flex flex-col justify-center p-2 w-full">
+                    className={`w-full bg-coal flex flex-col `}>
+                    <div className={`p-2 w-full`}>
                         <div className="text-lg flex items-center justify-between gap-2" onClick={()=>setTimelineOpen(!timelineOpen)}>
                             <h1>Timeline</h1>
                             <div className={`${timelineOpen ? "rotate-180" : "rotate-0"} duration-200 transition-all`}>
                                 <FontAwesomeIcon icon={faChevronDown} className="text-ruby"/>
                             </div>
                         </div>
-                        {timelineOpen && <div>
-                            hi there
-                        </div>}
+                        <AnimatePresence>
+                            {timelineOpen && 
+                            <motion.div 
+                                initial={{height: 0, opacity: 0}}
+                                animate={{height: "100vh", opacity: 1}}
+                                exit={{height: 0, opacity: 0}}
+                                className="w-full relative"
+                                >
+                                    <div className="w-full absolute top-1 z-20 h-[93.5%] flex justify-center">
+                                        <div className="bg-ruby w-4"></div>
+                                    </div>
+                                    <div className="w-full h-full absolute z-30 top-0 flex flex-col justify-between items-center">
+                                        <div className="bg-darkRuby flex items-center justify-center w-20 h-20 rounded-full">
+                                            <div className="bg-snow flex items-center justify-center w-14 h-14 rounded-full"></div>
+                                        </div>
+                                        <TimelineButton link={"/1936-1940"} date={1936} delay={0.7} duration={0.5}/>
+                                        <TimelineButton link={"/1940-1944"} date={1940} delay={0.8} duration={0.5}/>
+
+                                        <TimelineButton link={"/1944-1948"} date={1944} delay={0.9} duration={0.5}/>
+
+                                        <TimelineButton link={"/1948-1951"} date={1948} delay={1} duration={0.5}/>                                        <div className="w-16 h-16 rotate-90 flex items-center justify-center">
+                                            <TimelineTriangle/>
+                                        </div>
+                                    </div>
+                                
+                            </motion.div>}                            
+                        </AnimatePresence>
+
                     </div>
                     <div 
                         className="flex items-center w-full justify-between gap-2 text-lg p-2 border-y-soot border-y-2 border-y-solid"
