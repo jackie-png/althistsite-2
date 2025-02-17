@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEmpire } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRight, faBars, faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, easeInOut, motion } from "framer-motion";
 import { TimelineCircle } from "./TimelineCircle";
 import { TimelineTriangle } from "./TimelineTriangle";
 import { useRouter } from "next/navigation";
@@ -48,7 +48,7 @@ export default function Navbar(){
                     delay: delay,
                     duration: duration
                 }}
-                className="flex justify-center items-center h-16 bg-white border-ruby border-[10px] rounded-full w-20 lg:w-32 py-1 text-coal font-bold tracking-wide"
+                className="flex justify-center items-center h-12 md:h-16 bg-white border-ruby border-[10px] text-sm md:text-base rounded-full md:rounded-full w-24 lg:w-32 py-1 text-coal font-bold tracking-wide"
                 onClick={()=>{
                     router.push(link);
                     setDropdown(!dropdownOpen)
@@ -62,13 +62,13 @@ export default function Navbar(){
     return(
         <div className="absolute w-full top-0 z-50">            
             {/**upper navbar */}
-            <div className={`bg-coal text-snow relative z-50 h-20 flex flex-col px-4 py-4 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
-                <div className="flex items-center gap-8">
+            <div className={`bg-coal text-snow relative z-50 h-20 flex flex-col px-1 md:px-4 py-4 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
+                <div className="flex items-center justify-between gap-2 md:gap-8">
                     <div className="h-12 w-12 flex items-center justify-center cursor-pointer" onClick={()=>router.push("/")}>
                         <Logo/>
                     </div>
                     <div className="flex items-center justify-center border-solid border-2 border-soot rounded h-12 px-4 cursor-pointer" onClick={()=>router.push("/")}>
-                        <h1 className="text-xl">Rise of the German Hegemony</h1>
+                        <h1 className="text-[0.85rem] md:text-xl">Rise of the German Hegemony</h1>
                     </div>
                     {!isMobile ? <div className={`gap-8 h-12 flex flex-grow border-solid border-2 border-soot rounded items-center justify-center select-none`}>
                             <div 
@@ -90,7 +90,10 @@ export default function Navbar(){
                         </div>
                         :
                         <button
-                            onClick={()=>setDropdown(!dropdownOpen)}
+                            onClick={()=>{
+                                setDropdown(!dropdownOpen);
+                                setTimelineOpen(false)
+                            }}
                         >
                             <FontAwesomeIcon icon={faBars}/>
                         </button>
@@ -170,24 +173,71 @@ export default function Navbar(){
                             <motion.div 
                                 initial={{height: 0, opacity: 0}}
                                 animate={{height: "100vh", opacity: 1}}
-                                exit={{height: 0, opacity: 0}}
+                                exit={{
+                                    height: 0,
+                                    opacity: 0,
+                                    transition:{
+                                        opacity: { duration: 0.2 }, // Height-specific duration
+                                        delay: 0.2,
+                                        duration: 0.3,
+                                        ease: "easeInOut"
+                                    }                                    
+                                }}
+                                transition={{
+                                    duration: 0.5
+                                }}
+
                                 className="w-full relative"
                                 >
-                                    <div className="w-full absolute top-1 z-20 h-[93.5%] flex justify-center">
+                                    <motion.div 
+                                        initial={{
+                                            height: 0
+                                        }}
+                                        animate={{
+                                            height: "93.5%"
+                                        }}
+                                        transition={{
+                                            duration: 0.3,
+                                            delay: 0.4
+                                        }}
+                                        className="w-full absolute top-1 z-20 flex justify-center">
                                         <div className="bg-ruby w-4"></div>
-                                    </div>
+                                    </motion.div>
                                     <div className="w-full h-full absolute z-30 top-0 flex flex-col justify-between items-center">
-                                        <div className="bg-darkRuby flex items-center justify-center w-20 h-20 rounded-full">
-                                            <div className="bg-snow flex items-center justify-center w-14 h-14 rounded-full"></div>
-                                        </div>
-                                        <TimelineButton link={"/1936-1940"} date={1936} delay={0.7} duration={0.5}/>
-                                        <TimelineButton link={"/1940-1944"} date={1940} delay={0.8} duration={0.5}/>
+                                        <motion.div 
+                                            initial={{height: 0, width: 0}}
+                                            animate={{height: "5rem", width: "5rem"}}
+                                            transition={{
+                                                duration: 0.3,
+                                                ease: "easeInOut"
+                                            }}
+                                            className="bg-darkRuby flex items-center justify-center w-20 h-20 rounded-full">
+                                            <motion.div 
+                                            initial={{height: 0, width: 0}}
+                                            animate={{height: "3.5rem", width: "3.5rem"}}
+                                            transition={{
+                                                duration: 0.2,
+                                                ease: "easeInOut",
+                                                delay: 0.2
 
-                                        <TimelineButton link={"/1944-1948"} date={1944} delay={0.9} duration={0.5}/>
+                                            }}
+                                            className="bg-snow flex items-center justify-center w-14 h-14 rounded-full"></motion.div>
+                                        </motion.div>
 
-                                        <TimelineButton link={"/1948-1951"} date={1948} delay={1} duration={0.5}/>                                        <div className="w-16 h-16 rotate-90 flex items-center justify-center">
+                                        <TimelineButton link={"/1936-1940"} date={1936} delay={0.5} duration={0.5}/>
+                                        <TimelineButton link={"/1940-1944"} date={1940} delay={0.6} duration={0.5}/>
+                                        <TimelineButton link={"/1944-1948"} date={1944} delay={0.7} duration={0.5}/>
+                                        <TimelineButton link={"/1948-1951"} date={1948} delay={0.8} duration={0.5}/>       
+                                        <motion.div 
+                                            initial={{opacity: 0}}
+                                            animate={{opacity: 1}}
+                                            transition={{
+                                                duration: 0.3,
+                                                delay: 0.5
+                                            }}
+                                            className="w-16 h-16 rotate-90 flex items-center justify-center">
                                             <TimelineTriangle/>
-                                        </div>
+                                        </motion.div>
                                     </div>
                                 
                             </motion.div>}                            
