@@ -2,7 +2,7 @@
 import { SelectableCountries2 } from "@/app/components/SelectableCountries2";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 export default function page(){
@@ -72,12 +72,19 @@ export default function page(){
                     }
                 </div>
             </div>
-            {link !== "" && <motion.div className={`flex md:none w-full items-end justify-center absolute z-10 bottom-10 left-0`}>
-                <button className="flex items-center justify-center gap-2 p-2 bg-ruby rounded" onClick={()=>goToLink(link)}>
-                    Go to Article
-                    <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4"/>
-                </button>                                
-            </motion.div>}
+            <AnimatePresence>
+                {link !== "" && 
+                <motion.div
+                    initial={{opacity: 0}}
+                    animate={{opacity: 1}}
+                    className={`flex md:none w-full items-end justify-center absolute z-10 bottom-10 left-0`}>
+                    <button className="flex items-center justify-center gap-2 p-2 bg-ruby rounded" onClick={()=>goToLink(link)}>
+                        Go to Article
+                        <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4"/>
+                    </button>                                
+                </motion.div>}                
+            </AnimatePresence>
+
         </div>
     )
 }
