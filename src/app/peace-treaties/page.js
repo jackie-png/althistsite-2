@@ -14,7 +14,7 @@ export default function page(){
     console.log(link === "")
 
     function goToLink(links){
-        router.push(`/peace-treaties/${link}`)
+        router.push(`/peace-treaties/${links}`)
     }
 
     useEffect(()=>{

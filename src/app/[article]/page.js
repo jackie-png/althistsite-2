@@ -3,18 +3,6 @@ import postgres from "postgres";
 import DisplayArticle2 from "../components/DisplayArticle2";
 const sql = postgres(process.env.POSTGRES_URL, {ssl: "require"});
 export default async function page({params}){
-    // const {scrollYProgress} = useScroll()
-    //     const [height,setHeight] = useState(0);
-    //     const [hasReachedBottom, setHasReached] = useState(false);
-    
-    //   useEffect(() => {
-    //     return scrollYProgress.onChange((value) => {
-    //       console.log("scrollYProgress:", value); // This will return a number (0 to 1)
-    //       if(!hasReachedBottom){
-    //         setHeight(value);
-    //       }
-    //     });
-    //   }, [scrollYProgress]);
     async function fetchData(article){
         console.log(article)
         const data = sql`select * from articles where article_name = ${article}`
@@ -31,10 +19,6 @@ export default async function page({params}){
     if (data?.length !== 0){
         return(
             <div className="bg-coal flex flex-col items-center justify-center pb-16 pt-20">
-                {/* <motion.div
-                    className="fixed top-0 left-0 origin-top-left z-[9999] w-full h-3 bg-ruby"
-                    style={{width: `${height*100}%`}}
-                ></motion.div> */}
                 <div 
                     className="relative h-screen w-screen bg-cover bg-no-repeat justify-center" 
                     style={{
