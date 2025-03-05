@@ -1,6 +1,6 @@
 import React from "react"
 import postgres from "postgres";
-import DisplayArticle2 from "../components/DisplayArticle2";
+import DisplayArticle from "../components/DisplayArticle";
 const sql = postgres(process.env.POSTGRES_URL, {ssl: "require"});
 export default async function page({params}){
     async function fetchData(article){
@@ -35,8 +35,8 @@ export default async function page({params}){
                     </div>
                 </div>
                 
-                <div className="bg-snow w-11/12 h-full px-4 md:px-8 py-16 rounded-lg flex flex-col gap-2">
-                    <DisplayArticle2 data={data[0].article_HTML}/>
+                <div className="bg-snow w-9/12 h-full px-4 md:px-8 py-16 rounded-lg flex flex-col gap-2">
+                    <DisplayArticle data={data[0].article_HTML}/>
                 </div>
             </div>
         )        

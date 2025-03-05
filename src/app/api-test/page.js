@@ -1,7 +1,7 @@
 import postgres from "postgres"
 import parse from "html-react-parser"
 import DisplayArticle from "../components/DisplayArticle";
-import DisplayArticle2 from "../components/DisplayArticle2";
+import DisplayArticle2 from "../components/DisplayArticle";
 
 const sql = postgres(process.env.POSTGRES_URL, {ssl: "require"});
 export default async function Page(){
