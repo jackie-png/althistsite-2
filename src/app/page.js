@@ -194,10 +194,10 @@ export default function Home() {
         </div>
         <div className="relative">
             <div className="relative grid grid-rows-[max-content_max-content_max-content_max-content] z-10">
-                <TimelineSection date={1936} title={"The State of the World"} image={"/images/treatyLondon.jpg"} link={"/1936-1940"}/>
-                <TimelineSection date={1940} title={"The Clash between Hammers and Claws"} image={"/images/image2.png"} link={"/1940-1944"}/>
-                <TimelineSection date={1944} title={"The War Beyond Europe"} image={"/images/russia.png"} link={"/1944-1948"}/>
-                <TimelineSection date={1948} title={"Rise of a New World Order"} image={"/images/northAmerica.png"} link={"/1948-1951"} last/>
+                <TimelineSection date={1936} title={"The State of the World"} image={"/images/1936-bg.png"} link={"/1936-1940"}/>
+                <TimelineSection date={1940} title={"The Clash between Hammers and Claws"} image={"/images/1940-bg.png"} link={"/1940-1944"}/>
+                <TimelineSection date={1944} title={"The War Beyond Europe"} image={"/images/1944-bg.png"} link={"/1944-1948"}/>
+                <TimelineSection date={1948} title={"Rise of a New World Order"} image={"/images/1948-bg.png"} link={"/1948-1951"} last/>
             </div>        
         </div>
         <div className="flex justify-center items-center bg-darkRuby h-32 text-2xl md:text-3xl lg:text-4xl font-bold ">
