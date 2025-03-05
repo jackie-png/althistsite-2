@@ -1,12 +1,29 @@
+"use client"
 import Image from "next/image";
 import Markdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 export default function DisplayArticle({data}){
     console.log(data)
+
+    const [isImgView, setImgView] = useState(false);
+    const [imgSrc, setImgSrc] = useState("/images/KRworld1951V2.png")
     return(
         <div className="flex flex-col">
-            <div className="h-screen w-full bg-black/50 fixed"></div>
+            {isImgView && <div className="top-0 left-0 h-screen z-[9999] w-full bg-black/50 fixed">
+                <div className="flex items-center p-4 top-0 left-0 absolute z-[9999] w-full ">
+                    <button
+                        onClick={()=>setImgView(false)}
+                        className="w-6 h-6"
+                    >
+                        <FontAwesomeIcon icon={faClose} className="w-6 h-6"/>
+                    </button>                    
+                </div>
+                <Image src={imgSrc} alt="image in view" fill className="h-screen" style={{objectFit: "contain"}} loading="eager"/>
+            </div>}
             <Markdown 
                 remarkPlugins={remarkGfm}
                 unwrapDisallowed={true}
@@ -25,7 +42,7 @@ export default function DisplayArticle({data}){
                             if (node.children.length === 1 && node.children[0].tagName === "img"){
                                 return children
                             } else {
-                                return <p className="indent-16 text-coal my-4 max-w-[1200px] leading-[2rem] text-sm md:text-base" {...props}>{children}</p>
+                                return <p className="indent-8 md:indent-16 text-coal my-4 max-w-[1200px] leading-[2rem] text-sm md:text-base" {...props}>{children}</p>
                             }
                         }, 
                         img: ({node, ...props}) => {
@@ -35,8 +52,12 @@ export default function DisplayArticle({data}){
                                 <img 
                                     src={src} 
                                     alt={alt} 
-                                    className="rounded-lg shadow-lg border-coal border-2 w-1/2 cursor-pointer"
+                                    className="rounded-lg shadow-lg border-coal border-2 w-full md:w-3/4 lg:w-1/2 cursor-pointer"
                                     loading="eager"
+                                    onClick={()=>{
+                                        setImgSrc(src)
+                                        setImgView(true)
+                                    }}
                                 />
                                 {alt && <span className="indent-0 text-sm text-center">{alt}</span>}                                    
                             </div>)
