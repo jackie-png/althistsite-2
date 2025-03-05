@@ -30,10 +30,10 @@ export default function DisplayArticle({data}){
                 components={
                     {
                         h1: ({node, ...props}) =>(
-                            <h1 className="bg-darkRuby py-6 flex items-center justify-center font-bold text-2xl tracking-wider rounded-full shadow-xl" {...props}/>
+                            <h1 className="bg-darkRuby py-6 md:mx-4 flex items-center justify-center font-bold text-2xl tracking-wider rounded-none md:rounded-full shadow-xl" {...props}/>
                         ),
                         h2: ({node, ...props}) =>(
-                            <h2 className="bg-white w-fit flex self-center py-4 px-6 justify-center items-center text-coal text-lg text-center md:text-xl my-4 rounded-lg shadow-lg" {...props}/>
+                            <h2 className="bg-white w-fit flex self-center py-4 px-6 justify-center items-center text-coal text-base text-center md:text-xl mx-4 my-4 rounded-lg shadow-lg" {...props}/>
                         ),
                         h3: ({node, ...props}) =>(
                             <h3 className="flex justify-center text-coal text-lg my-4" {...props}/>
@@ -42,7 +42,7 @@ export default function DisplayArticle({data}){
                             if (node.children.length === 1 && node.children[0].tagName === "img"){
                                 return children
                             } else {
-                                return <p className="indent-8 md:indent-16 text-coal my-4 max-w-[1200px] leading-[2rem] text-sm md:text-base" {...props}>{children}</p>
+                                return <p className="indent-8 md:indent-16 text-coal mx-4 my-4 max-w-[1200px] leading-[2rem] md:leading-[2.5rem] text-sm md:text-base text-justify md:text-left" {...props}>{children}</p>
                             }
                         }, 
                         img: ({node, ...props}) => {

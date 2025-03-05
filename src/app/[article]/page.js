@@ -28,14 +28,14 @@ export default async function page({params}){
                     <div 
                         className="flex justify-center items-center h-screen w-screen absolute top-0 bg-gradient-to-t from-coal from-25%">
                         <div 
-                            className=" bg-opacity-60 rounded-t border-t-soot border-r-soot border-l-soot border-t-2 border-l-2 border-r-2 text-snow flex items-center justify-center flex-col gap-4 h-1/2 w-fit px-2 backdrop-blur-sm">
+                            className=" bg-opacity-60 rounded border-soot border-solid border-2 text-snow flex items-center justify-center flex-col gap-4 h-1/2 w-11/12 md:w-2/3 px-2 backdrop-blur-sm">
                             <h1 className="text-5xl md:text-7xl">{param}</h1>
                             <h2 className="text-center text-2xl md:text-4xl">{data[0].article_title}</h2>
                         </div>
                     </div>
                 </div>
                 
-                <div className="bg-snow w-9/12 h-full px-4 md:px-8 py-16 rounded-lg flex flex-col gap-2">
+                <div className="bg-snow md:w-9/12 h-full py-16 rounded-lg flex flex-col gap-2">
                     <DisplayArticle data={data[0].article_HTML}/>
                 </div>
             </div>

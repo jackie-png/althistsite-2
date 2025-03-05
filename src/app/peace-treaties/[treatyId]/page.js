@@ -27,8 +27,8 @@ export default async function page({params}){
                     <div 
                         className="flex justify-center items-center h-screen w-screen absolute top-0 bg-gradient-to-t from-coal from-25%">
                         <div 
-                            className=" bg-opacity-60 rounded-t border-t-soot border-r-soot border-l-soot border-t-2 border-l-2 border-r-2 text-snow flex items-center justify-center flex-col gap-4 h-1/2 w-fit px-2 backdrop-blur-sm">
-                            <h1 className="text-5xl md:text-7xl">{data[0].article_title}</h1>
+                            className=" bg-opacity-60 rounded border-soot border-2 text-snow flex items-center justify-center flex-col gap-4 h-1/2 w-3/4 md:w-2/3 px-2 backdrop-blur-sm">
+                            <h1 className="text-center text-4xl md:text-7xl">{data[0].article_title}</h1>
                         </div>
                     </div>
                 </div>

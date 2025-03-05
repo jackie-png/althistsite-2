@@ -221,11 +221,6 @@ export default function Home() {
             </div>
             <Image src={"/images/KRworld1951V2.png"} fill style={{objectFit: "cover", objectPosition:"center"}} alt="peace treaty image"/>
         </div>
-
-
-
-     
-
     </div>
   );
 }
