@@ -15,7 +15,7 @@ export default function Home() {
   const [aboutSelected, setAbout] = useState(false)
   const router = useRouter()
 
-  function TimelineSection({date, title, image, last, link}){
+  function TimelineSection({date, title, image, last, link, text}){
     const ref = useRef(null);
     const isInView = useInView(ref,{once: true, amount: 0.7});
     const [height,setHeight] = useState(0);
@@ -100,7 +100,7 @@ export default function Home() {
                 duration: 0.5,
                 delay: 0.3
               }}
-              className="flex w-2/3 justify-center items-center self-center justify-self-center md:text-nowrap text-xl md:text-3xl lg:text-4xl font-bold">
+              className="flex w-2/3 justify-center items-center self-center justify-self-center md:text-nowrap text-center text-3xl lg:text-4xl font-bold">
               <h1 className="underline-offset-8s underline">{title}</h1>
             </motion.div>
             <div className="bg-gradient-to-b row-span-2 md:row-span-1 from-transparent to-coal to-70% flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10">
@@ -119,7 +119,7 @@ export default function Home() {
                     ease: "easeInOut"
                   }}
                   className="border border-soot rounded p-2 max-w-[90%] md:max-w-[50%] backdrop-blur-sm">
-                    <p className="text-[0.5rem] lg:text-xs">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.</p>
+                    <p className="text-xs">{text}</p>
                 </motion.div>
                 <motion.button
                   initial={{
@@ -203,10 +203,10 @@ export default function Home() {
         </div>
         <div className="relative">
             <div className="relative grid grid-rows-[max-content_max-content_max-content_max-content] z-10">
-                <TimelineSection date={1936} title={"The State of the World"} image={"/images/1936-bg.png"} link={"/1936-1940"}/>
-                <TimelineSection date={1940} title={"The Clash between Hammers and Claws"} image={"/images/1940-bg.png"} link={"/1940-1944"}/>
-                <TimelineSection date={1944} title={"The War Beyond Europe"} image={"/images/1944-bg.png"} link={"/1944-1948"}/>
-                <TimelineSection date={1948} title={"Rise of a New World Order"} image={"/images/1948-bg.png"} link={"/1948-1951"} last/>
+                <TimelineSection date={1936} title={"The State of the World"} image={"/images/1936-bg.png"} link={"/1936-1940"} text="                            The interwar period held great signifcance in the lead up to the Second Weltkreig. The now exiled British and French governments compete with the internationale for influence in many different regional wars, the US is gripped with political instability, the Japanese find themselves in a crossroad for the future of their democracy, and Germany faces the challenges Black Monday and in maintaining their positions after the First Weltkreig. This section covers the major events of each continent leading up to the outbreak of war in 1940."/>
+                <TimelineSection date={1940} title={"The Clash between Hammers and Claws"} image={"/images/1940-bg.png"} link={"/1940-1944"} text="                            Tentions between the major factions of the world reach their boiling point in 1940, the Canadian and French Exile governments ramp up their anti-syndicalist rhetoric as calls to return to the homeland roar louder. The Third Internationale and the Reichspakt stare eye to eye with eachother, the Russian Republic begin preparations to rectify the failures of the Tsar and reclaim the west, all the while the Japanese Empire waits for an oppertune time to strike at German East Asia. This section covers the start of the Second Weltkreig, the Battle of Western Europe and the eventual fall of the Third Internationale, and the start of the Third Weltkreig."/>
+                <TimelineSection date={1944} title={"The War Beyond Europe"} image={"/images/1944-bg.png"} link={"/1944-1948"} text="                            Despite having high hopes for the future of the Reichspakt, the alliance's war enthusiasm sees rapid decline as the wars goes on. The sudden and surprising declaration of war from Canada and the French Exiles plunged the German Empire into a long war, covering fronts from North America, Africa, and India. The Russians fight tooth and nail to make the German advance to the Urals as slow and gruesome as possible, the Japanese secure and fortify their holdings for a future German Invasion, and all the while a sleeping giant was about to wake up."/>
+                <TimelineSection date={1948} title={"Rise of a New World Order"} image={"/images/1948-bg.png"} link={"/1948-1951"} last text="                            American Intervention into the now considered Third Weltkreig gave new life to the Entante who after the fall of India were on their last legs. After the fall of the Japanese Empire, all eyes were on North America as one last struggle to take down the American Junta begins, German victory was all but guaranteed at this point of the war, yet the Americans would not go down without a fight to the death. The world now watches as the Germans prepare themselves for a battle that will decide who should stand to claim global hegemony"/>
             </div>        
         </div>
         <div className="flex justify-center items-center bg-darkRuby h-32 text-2xl md:text-3xl lg:text-4xl font-bold ">
@@ -217,7 +217,7 @@ export default function Home() {
             <div className="absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-transparent to-coal z-20 flex justify-center items-center">
                 <div className="md:max-w-[50%] border-t-2 md:border-l-2 md:border-r-2 p-4 flex flex-col justify-center items-center gap-8 md:gap-4 border-soot backdrop-blur-sm md:rounded-tl md:rounded-tr">
                     <p className=" text-xs lg:text-sm">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam quam nulla porttitor massa id neque aliquam. Integer malesuada nunc vel risus commodo viverra maecenas. Donec adipiscing tristique risus nec feugiat. Ornare massa eget egestas purus viverra accumsan. Vitae congue mauris rhoncus aenean. Enim eu turpis egestas pretium. Justo nec ultrices dui sapien eget mi proin. Purus ut faucibus pulvinar elementum integer. Massa sed elementum tempus egestas.
+                    This section holds an archive of all the peace treaties the Germans would partake in between 1940-1951 and the resulting borders changes that came with each treaty. Notable treaties include the Treaties of Paris and London, the Treaty of Moscow, the Treaty of Japan, and the Treaty of Ottawa.
                     </p>
                     <button 
                       className="flex items-center gap-4 text-2xl font-bold bg-ruby py-2 px-4 rounded transition-transform duration-200 hover:scale-110"

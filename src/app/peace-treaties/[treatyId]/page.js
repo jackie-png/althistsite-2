@@ -33,7 +33,7 @@ export default async function page({params}){
                     </div>
                 </div>
                 
-                <div className="bg-snow w-11/12 md:w-9/12 h-full px-4 md:px-8 py-16 rounded-lg flex flex-col gap-2">
+                <div className="bg-snow md:w-9/12 h-full py-16 rounded-lg flex flex-col gap-2">
                     <DisplayArticle data={data[0].article_body}/>
                 </div>
             </div>

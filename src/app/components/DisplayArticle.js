@@ -52,7 +52,7 @@ export default function DisplayArticle({data}){
                                 <img 
                                     src={src} 
                                     alt={alt} 
-                                    className="rounded-lg shadow-lg border-coal border-2 w-full md:w-3/4 lg:w-1/2 cursor-pointer"
+                                    className="rounded-lg shadow-lg border-coal border-2 w-11/12 md:w-3/4 lg:w-1/2 cursor-pointer"
                                     loading="eager"
                                     onClick={()=>{
                                         setImgSrc(src)
