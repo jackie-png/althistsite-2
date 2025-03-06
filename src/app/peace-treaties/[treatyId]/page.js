@@ -21,7 +21,7 @@ export default async function page({params}){
                 <div 
                     className="relative h-screen w-screen bg-cover bg-no-repeat justify-center" 
                     style={{
-                        backgroundImage: 'url("/images/treatyParis_France.jpg")',
+                        backgroundImage: `url(${data[0].article_bg})`,
                         backgroundPosition: "center"
                     }}>
                     <div 

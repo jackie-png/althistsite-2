@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEmpire } from "@fortawesome/free-brands-svg-icons";
-import { faArrowRight, faChevronRight, faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faChevronRight, faChevronLeft, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, keyframes, useInView, useScroll, useTransform } from "framer-motion";
 import { motion } from "framer-motion";
@@ -41,7 +41,7 @@ export default function Home() {
     return (
       <div className="bg-coal relative min-h-screen" ref={ref}>
         {!last && <div className="absolute z-20 bottom-0 w-full h-1 flex justify-center items-center">
-          <motion.div 
+          {/* <motion.div 
             initial={{width: 0}}
             animate={{width: (isInView ? "40%" : 0)}}
             transition={{
@@ -50,8 +50,17 @@ export default function Home() {
               ease: "easeInOut"
             }}
             className="bg-darkRuby h-full rounded">
-
-          </motion.div>
+          </motion.div> */}
+          <button 
+            className="text-ruby animate-bounce text-2xl"
+            onClick={() =>
+              window.scrollBy({
+                top: window.innerHeight,
+                behavior: "smooth",
+              })
+            }            >
+            <FontAwesomeIcon icon={faChevronDown}/>
+          </button>
         </div>}
         <Image src={image} alt="landingpageimage" fill style={{objectFit: "cover"}}/>
         <div className={`absolute w-10 z-20 top-0 left-[5%] ${height >=100 ? "rounded-b-none" : "rounded-b-full" } hidden lg:flex flex-col items-center justify-center`} style={{height: `100%`}}>

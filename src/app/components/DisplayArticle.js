@@ -36,13 +36,13 @@ export default function DisplayArticle({data}){
                             <h2 className="bg-white w-fit flex self-center py-4 px-6 justify-center items-center text-coal text-base text-center md:text-xl mx-4 my-4 rounded-lg shadow-lg" {...props}/>
                         ),
                         h3: ({node, ...props}) =>(
-                            <h3 className="flex justify-center text-coal text-lg my-4" {...props}/>
+                            <h3 className="flex justify-center text-coal text-xl my-4 mx-4 text-center underline underline-offset-4" {...props}/>
                         ),
                         p: ({node, children, ...props}) =>{
                             if (node.children.length === 1 && node.children[0].tagName === "img"){
                                 return children
                             } else {
-                                return <p className="indent-8 md:indent-16 text-coal mx-4 my-4 max-w-[1200px] leading-[2rem] md:leading-[2.5rem] text-sm md:text-base text-justify md:text-left" {...props}>{children}</p>
+                                return <p className="indent-8 md:indent-16 text-coal mx-8 my-4 max-w-[1200px] leading-[2rem] md:leading-[2.5rem] text-sm md:text-base text-justify md:text-left" {...props}>{children}</p>
                             }
                         }, 
                         img: ({node, ...props}) => {
