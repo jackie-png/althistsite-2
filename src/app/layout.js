@@ -5,6 +5,7 @@ import {Noto_Serif} from 'next/font/google'
 import Navbar from "./components/Navbar";
 import { usePathname } from "next/navigation";
 import Footer from "./components/Footer";
+import {SpeedInsights} from '@vercel/speed-insights/next'
 
 const notoSerif = Noto_Serif({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
           <Navbar />
         </div>
         {children}
+        <SpeedInsights/>
         <Footer />
       </body>
     </html>
