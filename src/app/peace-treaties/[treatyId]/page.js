@@ -6,12 +6,12 @@ const sql = postgres(process.env.POSTGRES_URL, {ssl: "require"});
 export default async function page({params}){
     async function fetchData(article){
         console.log(article)
-        const data = sql`select * from "peace-treaties" where article_name = ${article}`
+        const data = await sql`select * from "peace-treaties" where article_name = ${article}`
         console.log(data)
         return data
     }
 
-    const param = params.treatyId
+    const param = (await params).treatyId
 
 
     const data = await fetchData(param);

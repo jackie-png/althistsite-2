@@ -1,11 +1,16 @@
 import React from "react"
 import postgres from "postgres";
 import DisplayArticle from "../components/DisplayArticle";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose, faList } from "@fortawesome/free-solid-svg-icons";
+import TableOfContents from "../components/TableOfContents";
+
+
 const sql = postgres(process.env.POSTGRES_URL, {ssl: "require"});
 export default async function page({params}){
     async function fetchData(article){
         console.log(article)
-        const data = sql`select * from articles where article_name = ${article}`
+        const data = await sql`select * from articles where article_name = ${article}`
         console.log(data)
         return data
     }
@@ -18,7 +23,7 @@ export default async function page({params}){
     console.log(data)
     if (data?.length !== 0){
         return(
-            <div className="bg-coal flex flex-col items-center justify-center pb-16 pt-20">
+            <div className="bg-coal flex flex-col items-center justify-center pb-16 pt-20 relative min-h-screen">
                 <div 
                     className="relative h-screen w-screen bg-cover bg-no-repeat justify-center" 
                     style={{
@@ -34,10 +39,13 @@ export default async function page({params}){
                         </div>
                     </div>
                 </div>
-                
+
+                <TableOfContents/>
+                    
                 <div className="bg-snow md:w-9/12 h-full py-16 rounded-lg flex flex-col gap-2">
                     <DisplayArticle data={data[0].article_HTML}/>
-                </div>
+                </div>                     
+                   
             </div>
         )        
     } else {

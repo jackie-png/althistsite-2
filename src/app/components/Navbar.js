@@ -17,6 +17,7 @@ export default function Navbar(){
 
 
 
+
     const router = useRouter();
 
     useEffect(()=>{
@@ -37,6 +38,8 @@ export default function Navbar(){
             window.removeEventListener("resize", checkMobile)
         }
     },[])
+
+
 
 
     function TimelineButton({link, date, delay, duration}){
@@ -64,41 +67,42 @@ export default function Navbar(){
             {/**upper navbar */}
             <div className={`bg-coal text-snow relative z-50 h-20 flex flex-col px-1 md:px-4 py-4 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
                 <div className="flex items-center justify-between gap-2 md:gap-8">
-                    <div className="h-12 w-12 flex items-center justify-center cursor-pointer" onClick={()=>router.push("/")}>
-                        <Logo/>
+                    <div className="h-12 w-12 cursor-pointer" onClick={()=>router.push("/")}>
+                        <Logo/>                
                     </div>
                     <div className="flex items-center justify-center border-solid border-2 border-soot rounded h-12 px-4 cursor-pointer" onClick={()=>router.push("/")}>
                         <h1 className="text-[0.85rem] md:text-xl">Rise of the German Hegemony</h1>
                     </div>
-                    {!isMobile ? <div className={`gap-8 h-12 flex flex-grow border-solid border-2 border-soot rounded items-center justify-center select-none`}>
+                    <div className={`hidden md:flex gap-8 h-12 flex-grow border-solid border-2 border-soot rounded items-center justify-center select-none`}>
                             <div 
                                 className={`flex gap-2 px-2 border-solid border-2 ${dropdownOpen ? "bg-ruby" : "bg-none"} ${dropdownOpen ? "border-darkRuby" : "border-soot"} rounded h-6 items-center justify-center hover:border-ruby hover:cursor-pointer`}
                                 onClick={()=>setDropdown(!dropdownOpen)}>
-                                <h2 className="text-sm">Timeline</h2>
+                                <h2 className="text-snow text-sm">Timeline</h2>
                                 <div className={`flex justify-center items-center w-5 h-5 text-snow`}>
                                     <FontAwesomeIcon icon={faChevronDown} className={`transition-all duration-300 ease-in-out ${dropdownOpen ? "rotate-180" : "rotate-0"}`}/>
                                 </div>
                             </div>
                             <div 
-                                className={`flex gap-2 px-2 border-solid border-2 border-soot rounded h-6 items-center justify-center select-none hover:border-ruby hover:cursor-pointer`} 
+                                className={`text-snow flex gap-2 px-2 border-solid border-2 border-soot rounded h-6 items-center justify-center select-none hover:border-ruby hover:cursor-pointer`} 
                                 onClick={()=>router.push("/peace-treaties")}>
-                                <h2 className="text-sm">Peace Treaties</h2>
+                                <h2 className=" text-snow text-sm">Peace Treaties</h2>
                                 <div className={`flex justify-center items-center w-5 h-5 "text-ruby"`}>
                                     <FontAwesomeIcon icon={faArrowRight}/>
                                 </div>
                             </div>
                         </div>
-                        :
+                        
                         <button
                             onClick={()=>{
                                 setDropdown(!dropdownOpen);
                                 setTimelineOpen(false)
                             }}
+                            className="block md:hidden"
                         >
                             <FontAwesomeIcon icon={faBars}/>
                         </button>
                     
-                    }
+                    
 
                 </div>                
             </div>
@@ -163,7 +167,7 @@ export default function Navbar(){
                     className={`w-full bg-coal flex flex-col `}>
                     <div className={`p-2 w-full`}>
                         <div className="text-lg flex items-center justify-between gap-2" onClick={()=>setTimelineOpen(!timelineOpen)}>
-                            <h1>Timeline</h1>
+                            <h1 className="text-snow">Timeline</h1>
                             <div className={`${timelineOpen ? "rotate-180" : "rotate-0"} duration-200 transition-all`}>
                                 <FontAwesomeIcon icon={faChevronDown} className="text-ruby"/>
                             </div>
@@ -235,7 +239,7 @@ export default function Navbar(){
                                                 duration: 0.3,
                                                 delay: 0.5
                                             }}
-                                            className="w-16 h-16 rotate-90 flex items-center justify-center">
+                                            className="w-16 h-16 rotate-90 flex">
                                             <TimelineTriangle/>
                                         </motion.div>
                                     </div>
@@ -248,7 +252,7 @@ export default function Navbar(){
                         className="flex items-center w-full justify-between gap-2 text-lg p-2 border-y-soot border-y-2 border-y-solid"
                         onClick={()=>{setDropdown(!dropdownOpen);router.push("/peace-treaties")}}
                         >
-                        <h1>Peace Treaties</h1>
+                        <h1 className="text-snow">Peace Treaties</h1>
                         <FontAwesomeIcon icon={faArrowRight} className="text-ruby"/>
                     </div>
                 </motion.div>)

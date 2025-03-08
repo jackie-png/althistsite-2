@@ -25,11 +25,12 @@ export default function ArticleLayout({children}){
         }
       },[height])
 
-    return (<div>
+    return (<div>   
         <motion.div
             className={`fixed top-0 left-0 origin-top-left z-[9999] w-full h-2 bg-ruby ${hasReachedBottom ? "rounded-none" : "rounded-r-full"}`}
             style={{width: `${height*100}%`}}
         ></motion.div>
         {children}
+
     </div>)
 }

@@ -59,7 +59,7 @@ export default function page(){
                         duration: 0.3,
                         ease: "easeInOut"
                     }}
-                    className="text-sm md:text-2xl tracking-wide font-bold">
+                    className="text-lg text-center md:text-2xl tracking-wide font-bold">
                     {currentHovered}
                 </motion.h1>
             </div>
@@ -78,7 +78,7 @@ export default function page(){
                     initial={{opacity: 0}}
                     animate={{opacity: 1}}
                     className={`flex md:none w-full items-end justify-center absolute z-10 bottom-10 left-0`}>
-                    <button className="flex items-center justify-center gap-2 p-2 bg-ruby rounded" onClick={()=>goToLink(link)}>
+                    <button className="text-snow flex items-center justify-center gap-2 p-2 bg-ruby rounded" onClick={()=>goToLink(link)}>
                         Go to Article
                         <FontAwesomeIcon icon={faArrowRight} className="w-4 h-4"/>
                     </button>                                
