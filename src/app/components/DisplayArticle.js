@@ -5,12 +5,39 @@ import remarkGfm from 'remark-gfm'
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faList } from "@fortawesome/free-solid-svg-icons";
-
-export default function DisplayArticle({data}){
-    console.log(data)
+import { useContext, useEffect } from "react";
+import { articleContext, useArticleContext } from "@/app/context/ArticleContext";
+export default function DisplayArticle({data, articleHeadings = []}){
+    console.log(articleHeadings)
 
     const [isImgView, setImgView] = useState(false);
     const [imgSrc, setImgSrc] = useState("/images/KRworld1951V2.png")
+    const {idsArr, setIds, displayText} = useArticleContext()
+    console.log(idsArr)
+
+    useEffect(()=>{
+        articleHeadings.forEach((heading)=>{
+            const hashtags = Array.from(heading.matchAll("#")).length
+            switch (hashtags) {
+                case 1:
+                    console.log({
+                        tag:"h1",
+                        heading:heading.substring(hashtags + 1)
+                    })
+                break;
+
+                case 2:
+                    console.log({
+                        tag:"h2",
+                        heading:heading.substring(hashtags + 1)
+                    })
+                break;
+            
+                default:
+                    break;
+            }
+        })
+    },[])
     return(
         <div>
             {isImgView && <div className="top-0 left-0 h-screen z-[9999] w-full bg-black/50 fixed">
@@ -31,11 +58,11 @@ export default function DisplayArticle({data}){
                     unwrapDisallowed={true}
                     components={
                         {
-                            h1: ({node, ...props}) =>(
-                                <h1 className="bg-darkRuby text-snow py-6 w-full md:w-11/12 mx-4 flex items-center justify-center font-bold text-2xl tracking-wider rounded-none md:rounded-full shadow-xl" {...props}/>
-                            ),
-                            h2: ({node, ...props}) =>(
-                                <h2 className="bg-white w-fit flex self-center py-4 px-6 justify-center items-center text-coal text-base text-center md:text-xl mx-4 my-4 rounded-lg shadow-lg" {...props}/>
+                            h1: ({node, children, ...props}) =>{
+                                return (<h1 id={`${children}`} className="bg-darkRuby text-snow py-6 w-full md:w-11/12 mx-4 flex items-center justify-center font-bold text-2xl tracking-wider rounded-none md:rounded-full shadow-xl" {...props}>{children}</h1>)
+                            },
+                            h2: ({node, children, ...props}) =>(
+                                <h2 id={`${children}`} className="bg-white w-fit flex self-center py-4 px-6 justify-center items-center text-coal text-base text-center md:text-xl mx-4 my-4 rounded-lg shadow-lg" {...props}>{children}</h2>
                             ),
                             h3: ({node, ...props}) =>(
                                 <h3 className="flex justify-center text-coal text-xl my-4 mx-4 text-center underline underline-offset-4" {...props}/>

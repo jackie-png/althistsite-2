@@ -2,6 +2,7 @@
 import { useScroll, useSpring } from "framer-motion";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import ArticleContext from "@/app/context/ArticleContext";
 export default function ArticleLayout({children}){
     const {scrollYProgress} = useScroll()
         const [height,setHeight] = useState(0);
@@ -30,7 +31,10 @@ export default function ArticleLayout({children}){
             className={`fixed top-0 left-0 origin-top-left z-[9999] w-full h-2 bg-ruby ${hasReachedBottom ? "rounded-none" : "rounded-r-full"}`}
             style={{width: `${height*100}%`}}
         ></motion.div>
-        {children}
+
+        <ArticleContext>
+          {children}
+        </ArticleContext>
 
     </div>)
 }

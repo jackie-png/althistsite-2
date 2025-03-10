@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faList } from "@fortawesome/free-solid-svg-icons"
 import React from "react"
 import { useState } from "react"
-export default function TableOfContents(){
+import { useContext } from "react"
+export default function TableOfContents({inText}){
     const [isTableOpen,setTableOpen] = useState(false);
     return (
         <div className={`fixed top-0 self-start transition-all duration-200 ease-in-out ${isTableOpen ? "left-0" : "-left-[25vw]"} z-40 flex items-center`}>
