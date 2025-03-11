@@ -16,20 +16,27 @@ export default function DisplayArticle({data, articleHeadings = []}){
     console.log(idsArr)
 
     useEffect(()=>{
+
+        const newIds =[]
+        let currentTag = ""        
         articleHeadings.forEach((heading)=>{
             const hashtags = Array.from(heading.matchAll("#")).length
+
             switch (hashtags) {
                 case 1:
-                    console.log({
+                    newIds.push({
                         tag:"h1",
-                        heading:heading.substring(hashtags + 1)
-                    })
+                        heading:heading.substring(hashtags + 1),
+                        section:""
+                    });
+                    currentTag = heading.substring(hashtags + 1);
                 break;
 
                 case 2:
-                    console.log({
+                    newIds.push({
                         tag:"h2",
-                        heading:heading.substring(hashtags + 1)
+                        heading:heading.substring(hashtags + 1),
+                        section: currentTag
                     })
                 break;
             
@@ -37,6 +44,7 @@ export default function DisplayArticle({data, articleHeadings = []}){
                     break;
             }
         })
+        setIds(newIds)
     },[])
     return(
         <div>
