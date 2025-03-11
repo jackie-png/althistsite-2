@@ -13,7 +13,7 @@ export default function DisplayArticle({data, articleHeadings = []}){
     const [isImgView, setImgView] = useState(false);
     const [imgSrc, setImgSrc] = useState("/images/KRworld1951V2.png")
     const {idsArr, setIds, displayText} = useArticleContext()
-    console.log(idsArr)
+    console.log(data)
 
     useEffect(()=>{
 
@@ -46,6 +46,7 @@ export default function DisplayArticle({data, articleHeadings = []}){
         })
         setIds(newIds)
     },[])
+
     return(
         <div>
             {isImgView && <div className="top-0 left-0 h-screen z-[9999] w-full bg-black/50 fixed">

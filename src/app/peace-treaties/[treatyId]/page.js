@@ -1,6 +1,7 @@
 import React from "react"
 import postgres from "postgres";
 import DisplayArticle from "@/app/components/DisplayArticle";
+import TableOfContents from "@/app/components/TableOfContents";
 const sql = postgres(process.env.POSTGRES_URL, {ssl: "require"});
 
 export default async function page({params}){
@@ -33,9 +34,11 @@ export default async function page({params}){
                     </div>
                 </div>
                 
+                <TableOfContents inText={data[0].article_title}/>
+                    
                 <div className="bg-snow md:w-9/12 h-full py-16 rounded-lg flex flex-col gap-2">
-                    <DisplayArticle data={data[0].article_body}/>
-                </div>
+                    <DisplayArticle data={data[0].article_body} articleHeadings={data[0].article_headings}/>
+                </div>    
             </div>
         )        
     } else {
