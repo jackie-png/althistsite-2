@@ -40,7 +40,7 @@ export default async function page({params}){
                     </div>
                 </div>
 
-                <TableOfContents inText={data[0].article_title}/>
+                <TableOfContents title={data[0].article_title}/>
                     
                 <div className="bg-snow md:w-9/12 h-full py-16 rounded-lg flex flex-col gap-2">
                     <DisplayArticle data={data[0].article_HTML} articleHeadings={data[0].article_headings}/>

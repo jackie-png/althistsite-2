@@ -12,13 +12,14 @@ export default function DisplayArticle({data, articleHeadings = []}){
 
     const [isImgView, setImgView] = useState(false);
     const [imgSrc, setImgSrc] = useState("/images/KRworld1951V2.png")
-    const {idsArr, setIds, displayText} = useArticleContext()
+    const {idsArr, setIds, displayText, h2Map, seth2Map} = useArticleContext()
     console.log(data)
 
     useEffect(()=>{
-
         const newIds =[]
-        let currentTag = ""        
+        const newH2Map = new Map()
+        let currentTag = ""    
+        let currentH2 = ""    
         articleHeadings.forEach((heading)=>{
             const hashtags = Array.from(heading.matchAll("#")).length
 
@@ -27,7 +28,8 @@ export default function DisplayArticle({data, articleHeadings = []}){
                     newIds.push({
                         tag:"h1",
                         heading:heading.substring(hashtags + 1),
-                        section:""
+                        section:"",
+                        subsection:""
                     });
                     currentTag = heading.substring(hashtags + 1);
                 break;
@@ -36,8 +38,21 @@ export default function DisplayArticle({data, articleHeadings = []}){
                     newIds.push({
                         tag:"h2",
                         heading:heading.substring(hashtags + 1),
-                        section: currentTag
-                    })
+                        section: currentTag,
+                        subsection:""
+                    });
+                    currentH2 = heading.substring(hashtags + 1);
+                    newH2Map.set(heading.substring(hashtags + 1), 0);
+                break;
+
+                case 3:
+                    newIds.push({
+                        tag:"h3",
+                        heading:heading.substring(hashtags + 1),
+                        section: currentTag,
+                        subsection:currentH2
+                    });
+                    newH2Map.set(currentH2, newH2Map.get(currentH2)+1);
                 break;
             
                 default:
@@ -45,6 +60,7 @@ export default function DisplayArticle({data, articleHeadings = []}){
             }
         })
         setIds(newIds)
+        seth2Map(newH2Map)
     },[])
 
     return(
@@ -73,8 +89,8 @@ export default function DisplayArticle({data, articleHeadings = []}){
                             h2: ({node, children, ...props}) =>(
                                 <h2 id={`${children}`} className="bg-white w-fit flex self-center py-4 px-6 justify-center items-center text-coal text-base text-center md:text-xl mx-4 my-4 rounded-lg shadow-lg" {...props}>{children}</h2>
                             ),
-                            h3: ({node, ...props}) =>(
-                                <h3 className="flex justify-center text-coal text-xl my-4 mx-4 text-center underline underline-offset-4" {...props}/>
+                            h3: ({node, children, ...props}) =>(
+                                <h3 id={`${children}`} className="flex justify-center text-coal text-xl my-4 mx-4 text-center underline underline-offset-4" {...props}>{children}</h3>
                             ),
                             p: ({node, children, ...props}) =>{
                                 if (node.children.length === 1 && node.children[0].tagName === "img"){
