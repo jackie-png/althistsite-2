@@ -15,9 +15,13 @@ const notoSerif = Noto_Serif({
 
 export default function RootLayout({ children }) {
   const router = usePathname();
+  console.log(router)
 
   return (
     <html lang="en" className="bg-snow m-0 p-0 box-border overflow-x-hidden">
+      <head>
+        <title>{router === "/peace-treaties" ? "Peace Treaties" : "Rise of the German Hegemony"}</title>
+      </head>
       <body
         className={`${notoSerif.variable} font-notoSerif relative m-0 p-0 box-border overflow-x-hidden`}
       >

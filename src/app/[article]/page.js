@@ -5,6 +5,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faList } from "@fortawesome/free-solid-svg-icons";
 import TableOfContents from "../components/TableOfContents";
 
+export async function generateMetadata({params}){
+
+    const {article} = await params
+
+    const data = await sql`select * from articles where article_name = ${article}`
+
+    return{
+        title: data[0].article_title
+    }
+
+}
 
 const sql = postgres(process.env.POSTGRES_URL, {ssl: "require"});
 export default async function page({params}){

@@ -4,6 +4,21 @@ import DisplayArticle from "@/app/components/DisplayArticle";
 import TableOfContents from "@/app/components/TableOfContents";
 const sql = postgres(process.env.POSTGRES_URL, {ssl: "require"});
 
+export async function generateMetadata({params}){
+
+    const {treatyId} = await params
+
+    console.log(treatyId)
+
+    const data = await sql`select * from "peace-treaties" where article_name = ${treatyId}`
+    console.log(data)
+
+    return{
+        title: data[0].article_title
+    }
+
+}
+
 export default async function page({params}){
     async function fetchData(article){
         console.log(article)
@@ -34,7 +49,7 @@ export default async function page({params}){
                     </div>
                 </div>
                 
-                <TableOfContents inText={data[0].article_title}/>
+                <TableOfContents title={data[0].article_title}/>
                     
                 <div className="bg-snow md:w-9/12 h-full py-16 rounded-lg flex flex-col gap-2">
                     <DisplayArticle data={data[0].article_body} articleHeadings={data[0].article_headings}/>
