@@ -63,7 +63,7 @@ export default function Navbar(){
     }
 
     return(
-        <div className="fixed w-full top-0 overflow-scroll">            
+        <div className="fixed w-full top-0">            
             {/**upper navbar */}
             <div className={`bg-coal text-snow relative h-20 flex flex-col px-1 md:px-4 py-4 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
                 <div className="flex items-center justify-between gap-2 md:gap-8">
