@@ -120,7 +120,7 @@ export default function Navbar(){
                         duration:0.3,
                         ease:"easeInOut",
                     }}
-                    className={`w-full bg-coal grid grid-rows-[6rem_6rem] `}>
+                    className={`w-full bg-coal grid grid-rows-[6rem_6rem] overflow-auto`}>
                     <motion.div 
                         initial={{scale:0}}
                         animate={{scale:1}}
