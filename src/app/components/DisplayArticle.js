@@ -75,7 +75,7 @@ export default function DisplayArticle({data, articleHeadings = []}){
                         <FontAwesomeIcon icon={faClose} className="w-6 h-6"/>
                     </button>                    
                 </div>
-                <Image src={imgSrc} alt="image in view" fill className="h-screen" style={{objectFit: "contain"}} loading="eager"/>
+                <NextImage src={imgSrc} alt="image in view" fill className="h-screen" style={{objectFit: "contain"}} loading="eager"/>
             </div>}
 
             <div className="relative flex flex-col w-full items-center">
