@@ -102,16 +102,6 @@ export default function DisplayArticle({data, articleHeadings = []}){
                             }, 
                             img: ({node, ...props}) => {
                                 const {src, alt} = props
-                                const [dimensions, setDimensions] = useState({height:0, width:0})
-                                const img = new Image();
-                                
-                                function onLoadHandle(event){
-                                    const {width,height} = event.target;
-                                    console.log(width)
-                                    console.log(height)
-                                    setDimensions({height:height, width:width});
-                                }
-
                                 return (
                                 <div className="flex flex-col items-center text-soot italic my-4">
                                     <img 
@@ -123,7 +113,6 @@ export default function DisplayArticle({data, articleHeadings = []}){
                                             setImgSrc(src)
                                             setImgView(true)
                                         }}
-                                        onLoad={onLoadHandle}
                                     />
                                     {alt && <span className="indent-0 text-sm text-center">{alt}</span>}                                    
                                 </div>)
