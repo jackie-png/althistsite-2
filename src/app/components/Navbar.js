@@ -207,7 +207,7 @@ export default function Navbar(){
                                         className="w-full absolute top-1 z-20 flex justify-center">
                                         <div className="bg-ruby w-4"></div>
                                     </motion.div>
-                                    <div className="w-full h-full absolute z-30 top-0 flex flex-col justify-between items-center">
+                                    <div className="w-full h-screen absolute z-30 top-0 flex flex-col justify-between items-center">
                                         <motion.div 
                                             initial={{height: 0, width: 0}}
                                             animate={{height: "4rem", width: "4rem"}}
