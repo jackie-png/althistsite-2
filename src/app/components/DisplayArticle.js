@@ -107,6 +107,8 @@ export default function DisplayArticle({data, articleHeadings = []}){
                                     <img 
                                         src={src} 
                                         alt={alt} 
+                                        width={1920}
+                                        height={1080}
                                         className="rounded-lg shadow-lg border-coal border-2 w-11/12 md:w-3/4 lg:w-1/2 cursor-pointer"
                                         loading="eager"
                                         onClick={()=>{
