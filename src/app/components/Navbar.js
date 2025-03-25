@@ -63,7 +63,7 @@ export default function Navbar(){
     }
 
     return(
-        <div className="fixed w-full top-0">            
+        <div className="fixed w-full top-0 overflow-scroll">            
             {/**upper navbar */}
             <div className={`bg-coal text-snow relative h-20 flex flex-col px-1 md:px-4 py-4 ${dropdownOpen ? "border-b-2" : ""} border-solid border-soot`}>
                 <div className="flex items-center justify-between gap-2 md:gap-8">
@@ -164,7 +164,7 @@ export default function Navbar(){
                         duration:0.3,
                         ease:"easeInOut",
                     }}
-                    className={`w-full bg-coal flex flex-col overflow-scroll`}>
+                    className={`w-full bg-coal flex flex-col`}>
                     <div className={`p-2 w-full`}>
                         <div className="text-lg flex items-center justify-between gap-2" onClick={()=>setTimelineOpen(!timelineOpen)}>
                             <h1 className="text-snow">Timeline</h1>
@@ -176,7 +176,7 @@ export default function Navbar(){
                             {timelineOpen && 
                             <motion.div 
                                 initial={{height: 0, opacity: 0}}
-                                animate={{height: "100vh", opacity: 1}}
+                                animate={{height: "75vh", opacity: 1}}
                                 exit={{
                                     height: 0,
                                     opacity: 0,
@@ -210,7 +210,7 @@ export default function Navbar(){
                                     <div className="w-full h-full absolute z-30 top-0 flex flex-col justify-between items-center">
                                         <motion.div 
                                             initial={{height: 0, width: 0}}
-                                            animate={{height: "4rem", width: "4rem"}}
+                                            animate={{height: "5rem", width: "5rem"}}
                                             transition={{
                                                 duration: 0.3,
                                                 ease: "easeInOut"
