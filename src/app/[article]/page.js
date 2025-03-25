@@ -4,6 +4,7 @@ import DisplayArticle from "../components/DisplayArticle";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faList } from "@fortawesome/free-solid-svg-icons";
 import TableOfContents from "../components/TableOfContents";
+import Image from "next/image";
 
 export async function generateMetadata({params}){
 
@@ -36,11 +37,9 @@ export default async function page({params}){
         return(
             <div className="bg-coal flex flex-col items-center justify-center pb-16 pt-20 relative min-h-screen">
                 <div 
-                    className="relative h-screen w-screen bg-cover bg-no-repeat justify-center" 
-                    style={{
-                        backgroundImage: `url(${data[0].article_bg})`,
-                        backgroundPosition: "center"
-                    }}>
+                    className="relative h-screen w-screen bg-cover bg-no-repeat justify-center">
+                    <Image src={data[0].article_bg} fill/>
+
                     <div 
                         className="flex justify-center items-center h-screen w-screen absolute top-0 bg-gradient-to-t from-coal from-25%">
                         <div 
