@@ -164,7 +164,7 @@ export default function Navbar(){
                         duration:0.3,
                         ease:"easeInOut",
                     }}
-                    className={`w-full bg-coal flex flex-col `}>
+                    className={`w-full bg-coal flex flex-col overflow-scroll`}>
                     <div className={`p-2 w-full`}>
                         <div className="text-lg flex items-center justify-between gap-2" onClick={()=>setTimelineOpen(!timelineOpen)}>
                             <h1 className="text-snow">Timeline</h1>
@@ -207,7 +207,7 @@ export default function Navbar(){
                                         className="w-full absolute top-1 z-20 flex justify-center">
                                         <div className="bg-ruby w-4"></div>
                                     </motion.div>
-                                    <div className="w-full h-screen absolute z-30 top-0 flex flex-col justify-between items-center overflow-auto">
+                                    <div className="w-full h-full absolute z-30 top-0 flex flex-col justify-between items-center">
                                         <motion.div 
                                             initial={{height: 0, width: 0}}
                                             animate={{height: "4rem", width: "4rem"}}
@@ -218,7 +218,7 @@ export default function Navbar(){
                                             className="bg-darkRuby flex items-center justify-center w-20 h-20 rounded-full">
                                             <motion.div 
                                             initial={{height: 0, width: 0}}
-                                            animate={{height: "2.5rem", width: "2.5rem"}}
+                                            animate={{height: "3.5rem", width: "3.5rem"}}
                                             transition={{
                                                 duration: 0.2,
                                                 ease: "easeInOut",
