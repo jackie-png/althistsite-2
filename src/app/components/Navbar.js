@@ -120,7 +120,7 @@ export default function Navbar(){
                         duration:0.3,
                         ease:"easeInOut",
                     }}
-                    className={`w-full bg-coal grid grid-rows-[6rem_6rem] overflow-auto`}>
+                    className={`w-full bg-coal grid grid-rows-[6rem_6rem]`}>
                     <motion.div 
                         initial={{scale:0}}
                         animate={{scale:1}}
@@ -210,7 +210,7 @@ export default function Navbar(){
                                     <div className="w-full h-full absolute z-30 top-0 flex flex-col justify-between items-center">
                                         <motion.div 
                                             initial={{height: 0, width: 0}}
-                                            animate={{height: "5rem", width: "5rem"}}
+                                            animate={{height: "4rem", width: "4rem"}}
                                             transition={{
                                                 duration: 0.3,
                                                 ease: "easeInOut"
@@ -218,7 +218,7 @@ export default function Navbar(){
                                             className="bg-darkRuby flex items-center justify-center w-20 h-20 rounded-full">
                                             <motion.div 
                                             initial={{height: 0, width: 0}}
-                                            animate={{height: "3.5rem", width: "3.5rem"}}
+                                            animate={{height: "2.5rem", width: "2.5rem"}}
                                             transition={{
                                                 duration: 0.2,
                                                 ease: "easeInOut",
