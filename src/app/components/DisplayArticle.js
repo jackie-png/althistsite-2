@@ -2,7 +2,7 @@
 import Markdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
 import { useState } from "react";
-import {Image as NextImage} from "next/image";
+import {Image} from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose, faList } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useEffect } from "react";
@@ -75,7 +75,7 @@ export default function DisplayArticle({data, articleHeadings = []}){
                         <FontAwesomeIcon icon={faClose} className="w-6 h-6"/>
                     </button>                    
                 </div>
-                <NextImage src={imgSrc} alt="image in view" fill className="h-screen" style={{objectFit: "contain"}} loading="eager"/>
+                <Image src={imgSrc} alt="image in view" fill className="h-screen" style={{objectFit: "contain"}} loading="eager"/>
             </div>}
 
             <div className="relative flex flex-col w-full items-center">
