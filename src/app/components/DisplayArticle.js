@@ -109,7 +109,7 @@ export default function DisplayArticle({data, articleHeadings = []}){
                                         alt={alt} 
                                         width={1920}
                                         height={1080}
-                                        className="rounded-lg shadow-lg border-coal border-2 w-11/12 md:w-3/4 lg:w-2/3 cursor-pointer"
+                                        className="rounded-lg shadow-lg border-coal border-2 w-11/12 md:w-3/4 cursor-pointer"
                                         onClick={()=>{
                                             setImgSrc(src)
                                             setImgView(true)
