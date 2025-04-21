@@ -71,7 +71,7 @@ export default function page(){
                         </motion.h1>
                     </div>
                     <div className="bg-[#0B0B2B] overflow-auto relative">
-                        <div className="w-[1200px] md:w-full relative z-0 top-0">
+                        <div className="w-[1200px] h-full md:w-full relative z-0 top-0">
                             {!isMobile ? 
                                 <SelectableCountries2 onHoverStart={setCurrentHovered} onClick={goToLink}/>
                                 :
