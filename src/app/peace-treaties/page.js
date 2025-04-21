@@ -55,7 +55,7 @@ export default function page(){
                 <title>Peace Treaties</title>
             </Head>
             <main>
-                <div className="relative">
+                <div className="relative min-h-screen">
                     <div className="pt-24 pb-4 bg-darkRuby flex justify-center text-snow">
                         
                         <motion.h1 
